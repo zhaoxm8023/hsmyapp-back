@@ -1,4 +1,4 @@
-# agile-wroking-backend
+# hsmyapp-backend
 
  此项目是  改编自*AgileWorking*
  它是一个用于部门内部会议室及团队管理的小程序，小程序的前端实现再项目的另外wechat目录。
