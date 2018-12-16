@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hsmy.app.service.WebTokenService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.AntPathMatcher;
@@ -17,10 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 自定义拦截器实现了 WebToken 的校验.
- * 
+ *
  * @author devzzm
  */
 public class WebTokenHandlerInterceptor implements HandlerInterceptor {
+	private static final Log logger = LogFactory.getLog(WebTokenHandlerInterceptor.class);
+
 
 	@Autowired
 	private WebTokenService webTokenService;
@@ -39,12 +43,15 @@ public class WebTokenHandlerInterceptor implements HandlerInterceptor {
 			return true;
 		} else {
 			String token = req.getHeader(tokenKey);
+			logger.info("tokenKey   ------- : " +token);
+
 			Assert.notNull(token, "Authorization 不可为空.");
 			String subject = req.getHeader(subjectKey);
 			Assert.notNull(subject, "Subject 不可为空.");
 			Assert.isTrue(webTokenService.verify(subject, token), "Web Token 校验失败.");
 			return true;
 		}
+
 	}
 
 	private boolean isIgnoreUri(String uri) {

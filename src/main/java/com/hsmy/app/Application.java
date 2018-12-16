@@ -2,8 +2,10 @@ package com.hsmy.app;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 import com.hsmy.app.web.support.WebTokenHandlerInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
 @EnableScheduling
+//@MapperScan(value = "com.hsmy.app.mapper")
 public class Application extends WebMvcConfigurerAdapter {
 
 	@Bean

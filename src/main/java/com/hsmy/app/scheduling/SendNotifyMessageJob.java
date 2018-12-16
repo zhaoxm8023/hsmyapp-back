@@ -70,15 +70,15 @@ public class SendNotifyMessageJob {
 		}
 
 		String accessToken = getAccessToken();
-		scheduleRepository.findByDate(date).forEach(s -> {
-			if (cache.contains(new Long(s.getScheduleId().intValue()))) {
-				return;
-			}
-			if (isNeedSendMessageNow(s)) {
-				doSend(accessToken, s);
-				cache.add(new Long(s.getScheduleId().intValue()));
-			}
-		});
+//		scheduleRepository.findByDate(date).forEach(s -> {
+//			if (cache.contains(new Long(s.getScheduleId().intValue()))) {
+//				return;
+//			}
+//			if (isNeedSendMessageNow(s)) {
+//				doSend(accessToken, s);
+//				cache.add(new Long(s.getScheduleId().intValue()));
+//			}
+//		});
 	}
 
 	private void doSend(String accessToken, ScheduleVO s) {

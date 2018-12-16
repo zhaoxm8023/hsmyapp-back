@@ -132,3 +132,61 @@ select * from  demo
 
 
 
+
+
+
+-- ----------------------------
+-- Table structure for hsmy_user
+-- ----------------------------
+DROP TABLE IF EXISTS `hsmy_user`;
+CREATE TABLE `hsmy_user` (
+	`open_id` varchar(80)  NOT NULL,
+	`nick_name` varchar(100) DEFAULT NULL,
+  `avatar_url` varchar(1000) DEFAULT NULL,
+	`mobile_no` varchar(20) DEFAULT NULL,
+  `room_no`  varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`open_id`)
+) ENGINE=InnoDB   DEFAULT CHARSET=utf8;
+
+
+INSERT INTO hsmy_user(open_id) VALUES ('1');
+COMMIT;
+select * from hsmy_user
+
+
+
+
+-- ----------------------------
+-- Table structure for hsmy_reqlog
+-- ----------------------------
+DROP TABLE IF EXISTS `hsmy_reqlog`;
+CREATE TABLE `hsmy_reqlog` (
+  `id` bigint(19) NOT NULL AUTO_INCREMENT COMMENT '日志id',
+  `login_name` varchar(255) DEFAULT NULL COMMENT '登陆名',
+  `role_name` varchar(255) DEFAULT NULL COMMENT '角色名',
+  `class_name` varchar(1024) DEFAULT NULL COMMENT '类名',
+  `method` varchar(1024) DEFAULT NULL COMMENT '请求方法',
+  `params` varchar(1024) DEFAULT NULL COMMENT '请求参数',
+  `time` bigint(19) DEFAULT NULL COMMENT '执行时长',
+  `client_ip` varchar(255) DEFAULT NULL COMMENT '客户端ip',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+	`token_id` varchar(80)  NOT NULL COMMENT 'req token',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=893 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+select * FROM  hsmy_reqlog
+
+
+
+
+
+
+
+
+
+
+
+
+
