@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsmy.app.mapper.HsmyInfoEnumMapper">
+    <resultMap id="BaseResultMap" type="com.hsmy.app.bean.HsmyInfoEnum">
+        <id column="infoenum" jdbcType="VARCHAR" property="infoenum"/>
+        <result column="infodesc" jdbcType="VARCHAR" property="infodesc"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        infoenum, infodesc
+    </sql>
+    <select id="selectByExample" parameterType="com.hsmy.app.bean.HsmyInfoEnumExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from hsmy_infoenum
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from hsmy_infoenum
+        where infoenum = #{infoenum,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from hsmy_infoenum
+        where infoenum = #{infoenum,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.hsmy.app.bean.HsmyInfoEnumExample">
+        delete from hsmy_infoenum
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.hsmy.app.bean.HsmyInfoEnum">
+        insert into hsmy_infoenum (infoenum, infodesc)
+        values (#{infoenum,jdbcType=VARCHAR}, #{infodesc,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hsmy.app.bean.HsmyInfoEnum">
+        insert into hsmy_infoenum
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="infoenum != null">
+                infoenum,
+            </if>
+            <if test="infodesc != null">
+                infodesc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="infoenum != null">
+                #{infoenum,jdbcType=VARCHAR},
+            </if>
+            <if test="infodesc != null">
+                #{infodesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.hsmy.app.bean.HsmyInfoEnumExample" resultType="java.lang.Long">
+        select count(*) from hsmy_infoenum
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update hsmy_infoenum
+        <set>
+            <if test="record.infoenum != null">
+                infoenum = #{record.infoenum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.infodesc != null">
+                infodesc = #{record.infodesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update hsmy_infoenum
+        set infoenum = #{record.infoenum,jdbcType=VARCHAR},
+        infodesc = #{record.infodesc,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hsmy.app.bean.HsmyInfoEnum">
+        update hsmy_infoenum
+        <set>
+            <if test="infodesc != null">
+                infodesc = #{infodesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where infoenum = #{infoenum,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hsmy.app.bean.HsmyInfoEnum">
+        update hsmy_infoenum
+        set infodesc = #{infodesc,jdbcType=VARCHAR}
+        where infoenum = #{infoenum,jdbcType=VARCHAR}
+    </update>
+</mapper>
