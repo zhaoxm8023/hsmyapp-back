@@ -11,7 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-
 @Mapper
 @Component
 public interface HsmyInfoPubMapper {
@@ -19,7 +18,7 @@ public interface HsmyInfoPubMapper {
 
     int deleteByExample(HsmyInfoPubExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(String infoSerno);
 
     int insert(HsmyInfoPub record);
 
@@ -27,7 +26,7 @@ public interface HsmyInfoPubMapper {
 
     List<HsmyInfoPub> selectByExample(HsmyInfoPubExample example);
 
-    HsmyInfoPub selectByPrimaryKey(Long id);
+    HsmyInfoPub selectByPrimaryKey(String infoSerno);
 
     int updateByExampleSelective(@Param("record") HsmyInfoPub record, @Param("example") HsmyInfoPubExample example);
 

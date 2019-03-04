@@ -2,6 +2,8 @@ package com.hsmy.app.service.impl;
 
 import java.security.Key;
 
+import com.hsmy.app.utils.CommonToolsUtils;
+import com.hsmy.app.utils.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.hsmy.app.service.WebTokenService;
@@ -25,6 +27,9 @@ public class SimpleJJWTWebTokenServiceImpl implements WebTokenService {
 
     @Override
     public String generate(String subject) {
+        if(CommonToolsUtils.isNull(subject) || StringUtils.isEmpty(subject)){
+            return "";
+        }
         return Jwts.builder().setSubject(subject).signWith(SignatureAlgorithm.HS512, key).compact();
     }
 

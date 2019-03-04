@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Component
 public class HsmyInfoPub {
-    private Long id;
+    private String infoSerno;
 
     private String openId;
 
@@ -16,18 +16,22 @@ public class HsmyInfoPub {
 
     private String infoEnum;
 
-    private String infoData;
+    private String infoWorkdata;
+
+    private String infoEnddata;
 
     private String infoDesc;
 
+    private String picsDesc;
+
     private Date lastDate;
 
-    public Long getId() {
-        return id;
+    public String getInfoSerno() {
+        return infoSerno;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setInfoSerno(String infoSerno) {
+        this.infoSerno = infoSerno;
     }
 
     public String getOpenId() {
@@ -62,12 +66,20 @@ public class HsmyInfoPub {
         this.infoEnum = infoEnum == null ? null : infoEnum.trim();
     }
 
-    public String getInfoData() {
-        return infoData;
+    public String getInfoWorkdata() {
+        return infoWorkdata;
     }
 
-    public void setInfoData(String infoData) {
-        this.infoData = infoData == null ? null : infoData.trim();
+    public void setInfoWorkdata(String infoWorkdata) {
+        this.infoWorkdata = infoWorkdata == null ? null : infoWorkdata.trim();
+    }
+
+    public String getInfoEnddata() {
+        return infoEnddata;
+    }
+
+    public void setInfoEnddata(String infoEnddata) {
+        this.infoEnddata = infoEnddata == null ? null : infoEnddata.trim();
     }
 
     public String getInfoDesc() {
@@ -76,6 +88,14 @@ public class HsmyInfoPub {
 
     public void setInfoDesc(String infoDesc) {
         this.infoDesc = infoDesc == null ? null : infoDesc.trim();
+    }
+
+    public String getPicsDesc() {
+        return picsDesc;
+    }
+
+    public void setPicsDesc(String picsDesc) {
+        this.picsDesc = picsDesc == null ? null : picsDesc.trim();
     }
 
     public Date getLastDate() {

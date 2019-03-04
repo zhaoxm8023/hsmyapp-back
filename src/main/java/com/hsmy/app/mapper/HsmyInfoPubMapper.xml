@@ -1,268 +1,297 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hsmy.app.mapper.HsmyInfoPubMapper">
-    <resultMap id="BaseResultMap" type="com.hsmy.app.bean.HsmyInfoPub">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
-        <result column="mobile_no" jdbcType="VARCHAR" property="mobileNo"/>
-        <result column="info_title" jdbcType="VARCHAR" property="infoTitle"/>
-        <result column="info_enum" jdbcType="VARCHAR" property="infoEnum"/>
-        <result column="info_data" jdbcType="VARCHAR" property="infoData"/>
-        <result column="info_desc" jdbcType="VARCHAR" property="infoDesc"/>
-        <result column="last_date" jdbcType="TIMESTAMP" property="lastDate"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="com.hsmy.app.bean.HsmyInfoPub">
+    <id column="info_serno" jdbcType="VARCHAR" property="infoSerno" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="mobile_no" jdbcType="VARCHAR" property="mobileNo" />
+    <result column="info_title" jdbcType="VARCHAR" property="infoTitle" />
+    <result column="info_enum" jdbcType="VARCHAR" property="infoEnum" />
+    <result column="info_workdata" jdbcType="VARCHAR" property="infoWorkdata" />
+    <result column="info_enddata" jdbcType="VARCHAR" property="infoEnddata" />
+    <result column="info_desc" jdbcType="VARCHAR" property="infoDesc" />
+    <result column="pics_desc" jdbcType="VARCHAR" property="picsDesc" />
+    <result column="last_date" jdbcType="TIMESTAMP" property="lastDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
-        id, open_id, mobile_no, info_title, info_enum, info_data, info_desc, last_date
-    </sql>
-    <select id="selectByExample" parameterType="com.hsmy.app.bean.HsmyInfoPubExample" resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
+          </trim>
         </if>
-        'true' as QUERYID,
-        <include refid="Base_Column_List"/>
-        from hsmy_infopub
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from hsmy_infopub
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from hsmy_infopub
-        where id = #{id,jdbcType=BIGINT}
-    </delete>
-    <delete id="deleteByExample" parameterType="com.hsmy.app.bean.HsmyInfoPubExample">
-        delete from hsmy_infopub
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <insert id="insert" parameterType="com.hsmy.app.bean.HsmyInfoPub">
-        insert into hsmy_infopub (id, open_id, mobile_no,
-        info_title, info_enum, info_data,
-        info_desc, last_date)
-        values (#{id,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR},
-        #{infoTitle,jdbcType=VARCHAR}, #{infoEnum,jdbcType=VARCHAR}, #{infoData,jdbcType=VARCHAR},
-        #{infoDesc,jdbcType=VARCHAR}, #{lastDate,jdbcType=TIMESTAMP})
-    </insert>
-    <insert id="insertSelective" parameterType="com.hsmy.app.bean.HsmyInfoPub">
-        insert into hsmy_infopub
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="openId != null">
-                open_id,
-            </if>
-            <if test="mobileNo != null">
-                mobile_no,
-            </if>
-            <if test="infoTitle != null">
-                info_title,
-            </if>
-            <if test="infoEnum != null">
-                info_enum,
-            </if>
-            <if test="infoData != null">
-                info_data,
-            </if>
-            <if test="infoDesc != null">
-                info_desc,
-            </if>
-            <if test="lastDate != null">
-                last_date,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="openId != null">
-                #{openId,jdbcType=VARCHAR},
-            </if>
-            <if test="mobileNo != null">
-                #{mobileNo,jdbcType=VARCHAR},
-            </if>
-            <if test="infoTitle != null">
-                #{infoTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="infoEnum != null">
-                #{infoEnum,jdbcType=VARCHAR},
-            </if>
-            <if test="infoData != null">
-                #{infoData,jdbcType=VARCHAR},
-            </if>
-            <if test="infoDesc != null">
-                #{infoDesc,jdbcType=VARCHAR},
-            </if>
-            <if test="lastDate != null">
-                #{lastDate,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="com.hsmy.app.bean.HsmyInfoPubExample" resultType="java.lang.Long">
-        select count(*) from hsmy_infopub
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update hsmy_infopub
-        <set>
-            <if test="record.id != null">
-                id = #{record.id,jdbcType=BIGINT},
-            </if>
-            <if test="record.openId != null">
-                open_id = #{record.openId,jdbcType=VARCHAR},
-            </if>
-            <if test="record.mobileNo != null">
-                mobile_no = #{record.mobileNo,jdbcType=VARCHAR},
-            </if>
-            <if test="record.infoTitle != null">
-                info_title = #{record.infoTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="record.infoEnum != null">
-                info_enum = #{record.infoEnum,jdbcType=VARCHAR},
-            </if>
-            <if test="record.infoData != null">
-                info_data = #{record.infoData,jdbcType=VARCHAR},
-            </if>
-            <if test="record.infoDesc != null">
-                info_desc = #{record.infoDesc,jdbcType=VARCHAR},
-            </if>
-            <if test="record.lastDate != null">
-                last_date = #{record.lastDate,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update hsmy_infopub
-        set id = #{record.id,jdbcType=BIGINT},
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    info_serno, open_id, mobile_no, info_title, info_enum, info_workdata, info_enddata, 
+    info_desc, pics_desc, last_date
+  </sql>
+  <select id="selectByExample" parameterType="com.hsmy.app.bean.HsmyInfoPubExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from hsmy_infopub
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hsmy_infopub
+    where info_serno = #{infoSerno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+
+    delete from hsmy_infopub
+    where info_serno = #{infoSerno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hsmy.app.bean.HsmyInfoPubExample">
+    delete from hsmy_infopub
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hsmy.app.bean.HsmyInfoPub">
+    insert into hsmy_infopub (info_serno, open_id, mobile_no, 
+      info_title, info_enum, info_workdata, 
+      info_enddata, info_desc, pics_desc, 
+      last_date)
+    values (#{infoSerno,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR},
+      #{infoTitle,jdbcType=VARCHAR}, #{infoEnum,jdbcType=VARCHAR}, #{infoWorkdata,jdbcType=VARCHAR}, 
+      #{infoEnddata,jdbcType=VARCHAR}, #{infoDesc,jdbcType=VARCHAR}, #{picsDesc,jdbcType=VARCHAR}, 
+      #{lastDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsmy.app.bean.HsmyInfoPub">
+    insert into hsmy_infopub
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="infoSerno != null">
+        info_serno,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="mobileNo != null">
+        mobile_no,
+      </if>
+      <if test="infoTitle != null">
+        info_title,
+      </if>
+      <if test="infoEnum != null">
+        info_enum,
+      </if>
+      <if test="infoWorkdata != null">
+        info_workdata,
+      </if>
+      <if test="infoEnddata != null">
+        info_enddata,
+      </if>
+      <if test="infoDesc != null">
+        info_desc,
+      </if>
+      <if test="picsDesc != null">
+        pics_desc,
+      </if>
+      <if test="lastDate != null">
+        last_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="infoSerno != null">
+        #{infoSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null">
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTitle != null">
+        #{infoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="infoEnum != null">
+        #{infoEnum,jdbcType=VARCHAR},
+      </if>
+      <if test="infoWorkdata != null">
+        #{infoWorkdata,jdbcType=VARCHAR},
+      </if>
+      <if test="infoEnddata != null">
+        #{infoEnddata,jdbcType=VARCHAR},
+      </if>
+      <if test="infoDesc != null">
+        #{infoDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="picsDesc != null">
+        #{picsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null">
+        #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hsmy.app.bean.HsmyInfoPubExample" resultType="java.lang.Long">
+    select count(*) from hsmy_infopub
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hsmy_infopub
+    <set>
+      <if test="record.infoSerno != null">
+        info_serno = #{record.infoSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null">
         open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileNo != null">
         mobile_no = #{record.mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoTitle != null">
         info_title = #{record.infoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoEnum != null">
         info_enum = #{record.infoEnum,jdbcType=VARCHAR},
-        info_data = #{record.infoData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoWorkdata != null">
+        info_workdata = #{record.infoWorkdata,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoEnddata != null">
+        info_enddata = #{record.infoEnddata,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoDesc != null">
         info_desc = #{record.infoDesc,jdbcType=VARCHAR},
-        last_date = #{record.lastDate,jdbcType=TIMESTAMP}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.hsmy.app.bean.HsmyInfoPub">
-        update hsmy_infopub
-        <set>
-            <if test="openId != null">
-                open_id = #{openId,jdbcType=VARCHAR},
-            </if>
-            <if test="mobileNo != null">
-                mobile_no = #{mobileNo,jdbcType=VARCHAR},
-            </if>
-            <if test="infoTitle != null">
-                info_title = #{infoTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="infoEnum != null">
-                info_enum = #{infoEnum,jdbcType=VARCHAR},
-            </if>
-            <if test="infoData != null">
-                info_data = #{infoData,jdbcType=VARCHAR},
-            </if>
-            <if test="infoDesc != null">
-                info_desc = #{infoDesc,jdbcType=VARCHAR},
-            </if>
-            <if test="lastDate != null">
-                last_date = #{lastDate,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.hsmy.app.bean.HsmyInfoPub">
-        update hsmy_infopub
-        set open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picsDesc != null">
+        pics_desc = #{record.picsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastDate != null">
+        last_date = #{record.lastDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hsmy_infopub
+    set info_serno = #{record.infoSerno,jdbcType=VARCHAR},
+      open_id = #{record.openId,jdbcType=VARCHAR},
+      mobile_no = #{record.mobileNo,jdbcType=VARCHAR},
+      info_title = #{record.infoTitle,jdbcType=VARCHAR},
+      info_enum = #{record.infoEnum,jdbcType=VARCHAR},
+      info_workdata = #{record.infoWorkdata,jdbcType=VARCHAR},
+      info_enddata = #{record.infoEnddata,jdbcType=VARCHAR},
+      info_desc = #{record.infoDesc,jdbcType=VARCHAR},
+      pics_desc = #{record.picsDesc,jdbcType=VARCHAR},
+      last_date = #{record.lastDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsmy.app.bean.HsmyInfoPub">
+    update hsmy_infopub
+    <set>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNo != null">
         mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTitle != null">
         info_title = #{infoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="infoEnum != null">
         info_enum = #{infoEnum,jdbcType=VARCHAR},
-        info_data = #{infoData,jdbcType=VARCHAR},
+      </if>
+      <if test="infoWorkdata != null">
+        info_workdata = #{infoWorkdata,jdbcType=VARCHAR},
+      </if>
+      <if test="infoEnddata != null">
+        info_enddata = #{infoEnddata,jdbcType=VARCHAR},
+      </if>
+      <if test="infoDesc != null">
         info_desc = #{infoDesc,jdbcType=VARCHAR},
-        last_date = #{lastDate,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-
-
+      </if>
+      <if test="picsDesc != null">
+        pics_desc = #{picsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastDate != null">
+        last_date = #{lastDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where info_serno = #{infoSerno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsmy.app.bean.HsmyInfoPub">
+    update hsmy_infopub
+    set open_id = #{openId,jdbcType=VARCHAR},
+      mobile_no = #{mobileNo,jdbcType=VARCHAR},
+      info_title = #{infoTitle,jdbcType=VARCHAR},
+      info_enum = #{infoEnum,jdbcType=VARCHAR},
+      info_workdata = #{infoWorkdata,jdbcType=VARCHAR},
+      info_enddata = #{infoEnddata,jdbcType=VARCHAR},
+      info_desc = #{infoDesc,jdbcType=VARCHAR},
+      pics_desc = #{picsDesc,jdbcType=VARCHAR},
+      last_date = #{lastDate,jdbcType=TIMESTAMP}
+    where info_serno = #{infoSerno,jdbcType=VARCHAR}
+  </update>
     <select id="selectInfo" resultType="java.util.LinkedHashMap">
-        select b.infodesc , a.*
-        from hsmy_infopub a , hsmy_infoenum b
-        where a.info_enum = b.infoenum
+        select a.*
+        from hsmy_infopub a
     </select>
 </mapper>

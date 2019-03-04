@@ -53,23 +53,24 @@ INSERT INTO `hsmy_infoenum` VALUES ('1000', '车位信息');
 -- Table structure for hsmy_infopub
 -- ----------------------------
 DROP TABLE IF EXISTS `hsmy_infopub`;
+-- index  for  open_id , info_enum , 
 CREATE TABLE `hsmy_infopub`  (
-  `id` bigint(19) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
+  `info_serno` VARCHAR(19) NOT NULL  COMMENT '主键',
+  `open_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '小程序用户名',
   `mobile_no` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `info_title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '信息标题',
   `info_enum` varchar(4) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '信息类型ID',
-  `info_data` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '信息有效时间',
+	`info_workdata` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '信息截止时间',
+  `info_enddata` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '信息截止时间',
   `info_desc` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '信息详情',
+	`pics_desc` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片详情',
   `last_date` datetime(0) NOT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1002 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '信息发布' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of hsmy_infopub
--- ----------------------------
-INSERT INTO `hsmy_infopub` VALUES (1000, '12', '15355031006', 'tedemo', '1000', '2018-12-24', '1111', '2018-12-24 00:00:00');
-INSERT INTO `hsmy_infopub` VALUES (1001, '123', '15355030079', 'testdemo', '1000', '2018-12-24', '22222', '2018-12-24 08:08:08');
+  PRIMARY KEY (`info_serno`) USING BTREE
+) ENGINE = InnoDB  CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '信息发布' ROW_FORMAT = Dynamic;
+ALTER TABLE `hsmy_infopub` ADD UNIQUE ( `info_serno`);
+ALTER TABLE `table_name` ADD INDEX index_name ( `open_id` );
+ALTER TABLE `table_name` ADD INDEX index_name ( `info_enum` );
+ALTER TABLE `table_name` ADD INDEX index_name ( `info_workdata` );
 
 -- ----------------------------
 -- Table structure for hsmy_reqlog

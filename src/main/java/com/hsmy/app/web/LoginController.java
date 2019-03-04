@@ -80,6 +80,7 @@ public class LoginController {
                     return DefaultResult.newFailResult(new BusinessException("用户注册异常！"));
                 }
             } catch (Exception e) {
+                logger.info("登录异常",e);
                 return DefaultResult.newFailResult(new BusinessException("不可重复加入小区！"));
             }
         } else {

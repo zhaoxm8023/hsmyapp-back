@@ -105,63 +105,63 @@ public class HsmyInfoPubExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
+        public Criteria andInfoSernoIsNull() {
+            addCriterion("info_serno is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
+        public Criteria andInfoSernoIsNotNull() {
+            addCriterion("info_serno is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Long value) {
-            addCriterion("id =", value, "id");
+        public Criteria andInfoSernoEqualTo(Long value) {
+            addCriterion("info_serno =", value, "infoSerno");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Long value) {
-            addCriterion("id <>", value, "id");
+        public Criteria andInfoSernoNotEqualTo(Long value) {
+            addCriterion("info_serno <>", value, "infoSerno");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Long value) {
-            addCriterion("id >", value, "id");
+        public Criteria andInfoSernoGreaterThan(Long value) {
+            addCriterion("info_serno >", value, "infoSerno");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("id >=", value, "id");
+        public Criteria andInfoSernoGreaterThanOrEqualTo(Long value) {
+            addCriterion("info_serno >=", value, "infoSerno");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Long value) {
-            addCriterion("id <", value, "id");
+        public Criteria andInfoSernoLessThan(Long value) {
+            addCriterion("info_serno <", value, "infoSerno");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Long value) {
-            addCriterion("id <=", value, "id");
+        public Criteria andInfoSernoLessThanOrEqualTo(Long value) {
+            addCriterion("info_serno <=", value, "infoSerno");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Long> values) {
-            addCriterion("id in", values, "id");
+        public Criteria andInfoSernoIn(List<Long> values) {
+            addCriterion("info_serno in", values, "infoSerno");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Long> values) {
-            addCriterion("id not in", values, "id");
+        public Criteria andInfoSernoNotIn(List<Long> values) {
+            addCriterion("info_serno not in", values, "infoSerno");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Long value1, Long value2) {
-            addCriterion("id between", value1, value2, "id");
+        public Criteria andInfoSernoBetween(Long value1, Long value2) {
+            addCriterion("info_serno between", value1, value2, "infoSerno");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Long value1, Long value2) {
-            addCriterion("id not between", value1, value2, "id");
+        public Criteria andInfoSernoNotBetween(Long value1, Long value2) {
+            addCriterion("info_serno not between", value1, value2, "infoSerno");
             return (Criteria) this;
         }
 
@@ -445,73 +445,143 @@ public class HsmyInfoPubExample {
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataIsNull() {
-            addCriterion("info_data is null");
+        public Criteria andInfoWorkdataIsNull() {
+            addCriterion("info_workdata is null");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataIsNotNull() {
-            addCriterion("info_data is not null");
+        public Criteria andInfoWorkdataIsNotNull() {
+            addCriterion("info_workdata is not null");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataEqualTo(String value) {
-            addCriterion("info_data =", value, "infoData");
+        public Criteria andInfoWorkdataEqualTo(String value) {
+            addCriterion("info_workdata =", value, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataNotEqualTo(String value) {
-            addCriterion("info_data <>", value, "infoData");
+        public Criteria andInfoWorkdataNotEqualTo(String value) {
+            addCriterion("info_workdata <>", value, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataGreaterThan(String value) {
-            addCriterion("info_data >", value, "infoData");
+        public Criteria andInfoWorkdataGreaterThan(String value) {
+            addCriterion("info_workdata >", value, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataGreaterThanOrEqualTo(String value) {
-            addCriterion("info_data >=", value, "infoData");
+        public Criteria andInfoWorkdataGreaterThanOrEqualTo(String value) {
+            addCriterion("info_workdata >=", value, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataLessThan(String value) {
-            addCriterion("info_data <", value, "infoData");
+        public Criteria andInfoWorkdataLessThan(String value) {
+            addCriterion("info_workdata <", value, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataLessThanOrEqualTo(String value) {
-            addCriterion("info_data <=", value, "infoData");
+        public Criteria andInfoWorkdataLessThanOrEqualTo(String value) {
+            addCriterion("info_workdata <=", value, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataLike(String value) {
-            addCriterion("info_data like", value, "infoData");
+        public Criteria andInfoWorkdataLike(String value) {
+            addCriterion("info_workdata like", value, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataNotLike(String value) {
-            addCriterion("info_data not like", value, "infoData");
+        public Criteria andInfoWorkdataNotLike(String value) {
+            addCriterion("info_workdata not like", value, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataIn(List<String> values) {
-            addCriterion("info_data in", values, "infoData");
+        public Criteria andInfoWorkdataIn(List<String> values) {
+            addCriterion("info_workdata in", values, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataNotIn(List<String> values) {
-            addCriterion("info_data not in", values, "infoData");
+        public Criteria andInfoWorkdataNotIn(List<String> values) {
+            addCriterion("info_workdata not in", values, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataBetween(String value1, String value2) {
-            addCriterion("info_data between", value1, value2, "infoData");
+        public Criteria andInfoWorkdataBetween(String value1, String value2) {
+            addCriterion("info_workdata between", value1, value2, "infoWorkdata");
             return (Criteria) this;
         }
 
-        public Criteria andInfoDataNotBetween(String value1, String value2) {
-            addCriterion("info_data not between", value1, value2, "infoData");
+        public Criteria andInfoWorkdataNotBetween(String value1, String value2) {
+            addCriterion("info_workdata not between", value1, value2, "infoWorkdata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataIsNull() {
+            addCriterion("info_enddata is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataIsNotNull() {
+            addCriterion("info_enddata is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataEqualTo(String value) {
+            addCriterion("info_enddata =", value, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataNotEqualTo(String value) {
+            addCriterion("info_enddata <>", value, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataGreaterThan(String value) {
+            addCriterion("info_enddata >", value, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataGreaterThanOrEqualTo(String value) {
+            addCriterion("info_enddata >=", value, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataLessThan(String value) {
+            addCriterion("info_enddata <", value, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataLessThanOrEqualTo(String value) {
+            addCriterion("info_enddata <=", value, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataLike(String value) {
+            addCriterion("info_enddata like", value, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataNotLike(String value) {
+            addCriterion("info_enddata not like", value, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataIn(List<String> values) {
+            addCriterion("info_enddata in", values, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataNotIn(List<String> values) {
+            addCriterion("info_enddata not in", values, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataBetween(String value1, String value2) {
+            addCriterion("info_enddata between", value1, value2, "infoEnddata");
+            return (Criteria) this;
+        }
+
+        public Criteria andInfoEnddataNotBetween(String value1, String value2) {
+            addCriterion("info_enddata not between", value1, value2, "infoEnddata");
             return (Criteria) this;
         }
 
@@ -582,6 +652,76 @@ public class HsmyInfoPubExample {
 
         public Criteria andInfoDescNotBetween(String value1, String value2) {
             addCriterion("info_desc not between", value1, value2, "infoDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescIsNull() {
+            addCriterion("pics_desc is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescIsNotNull() {
+            addCriterion("pics_desc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescEqualTo(String value) {
+            addCriterion("pics_desc =", value, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescNotEqualTo(String value) {
+            addCriterion("pics_desc <>", value, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescGreaterThan(String value) {
+            addCriterion("pics_desc >", value, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescGreaterThanOrEqualTo(String value) {
+            addCriterion("pics_desc >=", value, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescLessThan(String value) {
+            addCriterion("pics_desc <", value, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescLessThanOrEqualTo(String value) {
+            addCriterion("pics_desc <=", value, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescLike(String value) {
+            addCriterion("pics_desc like", value, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescNotLike(String value) {
+            addCriterion("pics_desc not like", value, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescIn(List<String> values) {
+            addCriterion("pics_desc in", values, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescNotIn(List<String> values) {
+            addCriterion("pics_desc not in", values, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescBetween(String value1, String value2) {
+            addCriterion("pics_desc between", value1, value2, "picsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicsDescNotBetween(String value1, String value2) {
+            addCriterion("pics_desc not between", value1, value2, "picsDesc");
             return (Criteria) this;
         }
 
