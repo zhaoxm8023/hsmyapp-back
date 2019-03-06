@@ -8,17 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -33,7 +29,7 @@ public class UpWeChatImageController {
 
         //realPath填写电脑文件夹路径
         String realPath = "D:\\Pictures\\WeChatPic";
-        WechatUtils.SaveWechatImage(multipartFile, realPath);
+        WechatUtils.SaveWechatImage(multipartFile, realPath,"");
         return "1";
     }
 
@@ -54,7 +50,7 @@ public class UpWeChatImageController {
                     //realPath填写电脑文件夹路径
                     String realPath = "D:\\Pictures\\WeChatPic";
                     //格式化时间戳
-                    WechatUtils.SaveWechatImage(multipartFile, realPath);
+                    WechatUtils.SaveWechatImage(multipartFile, realPath,"");
                 } catch (Exception e) {
                     stream = null;
                     return "You failed to upload " + i + " => "  + e.getMessage();

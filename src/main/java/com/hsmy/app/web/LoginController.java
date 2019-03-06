@@ -2,26 +2,22 @@ package com.hsmy.app.web;
 
 
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.hsmy.app.BusinessException;
 import com.hsmy.app.bean.ApiResponse;
 import com.hsmy.app.bean.HsmyUser;
 import com.hsmy.app.mapper.HsmyUserMapper;
 import com.hsmy.app.service.WebTokenService;
-import com.hsmy.app.utils.AliyunMessageUtil;
 import com.hsmy.app.utils.CommonToolsUtils;
 import com.hsmy.app.utils.EbaseYunMessageUtil;
 import com.hsmy.app.utils.StringUtils;
 import com.hsmy.app.web.support.DefaultResult;
 import com.hsmy.app.web.support.Result;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 public class LoginController {
@@ -48,6 +44,8 @@ public class LoginController {
 
 
     // 根据团队 id 及 微信 openId 查询绑定的用户
+    @ApiOperation(value="查询用户", notes="根据HsmyUser对象查询用户")
+    @ApiImplicitParam(name = "openId", value = "用户详细实体HsmyUser", required = true, dataType = "HsmyUser")
     @RequestMapping(path = "/hsmy/user/{openId}", method = RequestMethod.GET)
     public Result<HsmyUser> getUser(@PathVariable(name = "openId") String openId) {
         // find by openid

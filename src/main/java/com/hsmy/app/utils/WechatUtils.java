@@ -1,19 +1,19 @@
 package com.hsmy.app.utils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.AntPathMatcher;
-import org.springframework.util.PathMatcher;
-import org.springframework.util.StringUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 public class WechatUtils {
 
+    private static final Log logger = LogFactory.getLog(WechatUtils.class);
 //    public static String[] ignoreUriPatterns;
 //
 //    public static PathMatcher pathMatcher = new AntPathMatcher();
@@ -31,12 +31,13 @@ public class WechatUtils {
 //            ignoreUriPatterns = StringUtils.tokenizeToStringArray(ignoreUripattern, ",");
 //    }
 
-    public static void SaveWechatImage(MultipartFile multipartFile, String realPath) {
+
+    public static String SaveWechatImage(MultipartFile multipartFile, String realPath, String fileSerno) {
         //格式化时间戳
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         String nowTime = sdf.format(new Date().getTime());
 
-        //裁剪用户id
+        //取得图片前缀名称
         String originalFirstName = multipartFile.getOriginalFilename();
         String picFirstName = originalFirstName.substring(0, originalFirstName.indexOf("."));
 
@@ -45,21 +46,23 @@ public class WechatUtils {
         String picLastName = originalLastName.substring(originalLastName.lastIndexOf("."));
 
         //拼接：名字+时间戳+后缀  可以自定义
-        String picName = picFirstName + "." + nowTime + picLastName;
+        String picName = fileSerno + picFirstName + "." + nowTime + picLastName;
         try {
+            //默认目录 + 微信id作为图片查询目录
             File dir = new File(realPath);
             //如果文件目录不存在，创建文件目录
             if (!dir.exists()) {
                 dir.mkdir();
-                System.out.println("创建文件目录成功：" + realPath);
+                logger.info("创建文件目录成功：" + realPath);
             }
             File file = new File(realPath, picName);
             multipartFile.transferTo(file);
-            System.out.println("添加图片成功！");
+            logger.info("添加图片成功！");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
+        return picName ;
     }
 }
