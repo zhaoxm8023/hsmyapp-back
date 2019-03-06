@@ -68,9 +68,9 @@ CREATE TABLE `hsmy_infopub`  (
   PRIMARY KEY (`info_serno`) USING BTREE
 ) ENGINE = InnoDB  CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '信息发布' ROW_FORMAT = Dynamic;
 ALTER TABLE `hsmy_infopub` ADD UNIQUE ( `info_serno`);
-ALTER TABLE `table_name` ADD INDEX index_name ( `open_id` );
-ALTER TABLE `table_name` ADD INDEX index_name ( `info_enum` );
-ALTER TABLE `table_name` ADD INDEX index_name ( `info_workdata` );
+ALTER TABLE `hsmy_infopub` ADD INDEX index_open_id  ( `open_id` );
+ALTER TABLE `hsmy_infopub` ADD INDEX index_info_enum ( `info_enum` );
+ALTER TABLE `hsmy_infopub` ADD INDEX index_workdata ( `info_workdata` );
 
 -- ----------------------------
 -- Table structure for hsmy_reqlog

@@ -1,5 +1,6 @@
 package com.hsmy.app.web;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hsmy.app.BusinessException;
@@ -7,14 +8,20 @@ import com.hsmy.app.bean.HsmyInfoPub;
 import com.hsmy.app.mapper.HsmyInfoPubMapper;
 import com.hsmy.app.service.HsmyInfoService;
 import com.hsmy.app.utils.CommonToolsUtils;
+import com.hsmy.app.utils.WechatUtils;
 import com.hsmy.app.web.support.DefaultResult;
 import com.hsmy.app.web.support.Result;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -59,12 +66,37 @@ public class HsmyInfoController {
 
     //录入信息
     @RequestMapping(path = "/hsmy/infopub", method = RequestMethod.POST)
-    public Result<HsmyInfoPub> insertInfoPub(@RequestBody HsmyInfoPub infoPub) {
-        if (infoPub.getOpenId() != null && CommonToolsUtils.isNotNull(infoPub)) {
+    public Result<HsmyInfoPub> insertInfoPub( HttpServletRequest request, HttpServletResponse response) {
+        MultipartHttpServletRequest mulRequest = (MultipartHttpServletRequest) request;
+        List<MultipartFile> multipartFiles = mulRequest.getFiles("files");
+        String infoPubJson =  mulRequest.getParameter("infopub");
+        hsmyInfoPub = (HsmyInfoPub)JSON.parseObject(infoPubJson,HsmyInfoPub.class);
+        if (hsmyInfoPub.getOpenId() != null && CommonToolsUtils.isNotNull(hsmyInfoPub)) {
+            if(CommonToolsUtils.isNotNull(multipartFiles)){
+                MultipartFile multipartFile = null;
+                BufferedOutputStream stream = null;
+                for (int i = 0; i < multipartFiles.size(); ++i) {
+                    multipartFile = multipartFiles.get(i);
+                    if (!multipartFile.isEmpty()) {
+                        try {
+                            //realPath填写电脑文件夹路径
+                            String realPath = "D:\\Pictures\\WeChatPic";
+                            //格式化时间戳
+                            WechatUtils.SaveWechatImage(multipartFile, realPath);
+                        } catch (Exception e) {
+                            stream = null;
+                            return DefaultResult.newFailResult(new BusinessException("发布图片信息异常！"));
+                        }
+                    }
+                }
+            }
+
+            //oto do 自定义图片关联存储
+            hsmyInfoPub.setPicsDesc("11");
             try {
-                int count = hsmyInfoPubMapper.insertSelective(infoPub);
+                int count = hsmyInfoPubMapper.insertSelective(hsmyInfoPub);
                 if (count >= 0) {
-                    return DefaultResult.newResult(infoPub);
+                    return DefaultResult.newResult(hsmyInfoPub);
                 } else {
                     return DefaultResult.newFailResult(new BusinessException("发布信息异常！"));
                 }

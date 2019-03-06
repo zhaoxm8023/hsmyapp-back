@@ -55,7 +55,7 @@ public class ReqlogAspect {
     private String subjectKey = "Subject";
 
 
-    @Pointcut("execution(public * com.hsmy.app.web.*Controller.*(..))")
+    @Pointcut("execution(public * com.hsmy.app.web.*Controller.*(..)) && !execution(public * com.hsmy.app.web.HsmyInfoController.*(..))")
     public void logPointCut() {
     }
 
@@ -66,6 +66,8 @@ public class ReqlogAspect {
         //获取request
         HttpServletRequest request = WebUtils.getHttpServletRequest();
 
+        //针对部分请求头需要加token
+        logger.info("-------- token  -------- " + request.getHeader(tokenKey));
         //注解上的描述
         ReqLogger reqlog = signature.getMethod().getAnnotation(ReqLogger.class);
 
