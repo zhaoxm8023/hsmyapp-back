@@ -305,4 +305,11 @@
     <parameter property="sequencelenth" jdbcType="VARCHAR" mode="IN"></parameter>
   </parameterMap>
 
+
+  <update id="updatePicDescByInfoSerno" parameterType="java.lang.String">
+    update hsmy_infopub
+    set pics_desc = #{picsDesc,jdbcType=VARCHAR}
+    where info_serno = #{infoSerno,jdbcType=VARCHAR}
+  </update>
+
 </mapper>

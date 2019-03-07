@@ -1,70 +1,89 @@
 package com.hsmy.app.file;
 
+import com.hsmy.app.BusinessException;
 import com.hsmy.app.bean.HsmyInfoPub;
+import com.hsmy.app.constant.ConstantErrMsg;
+import com.hsmy.app.mapper.HsmyInfoPubMapper;
+import com.hsmy.app.utils.CommonToolsUtils;
 import com.hsmy.app.utils.WechatUtils;
+import com.hsmy.app.web.support.DefaultResult;
+import com.hsmy.app.web.support.Result;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
-import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
-@Controller
+@RestController
 public class UpWeChatImageController {
     private static final Log logger = LogFactory.getLog(UpWeChatImageController.class);
 
-    @RequestMapping(value = "/hsmy/infopub/uploadImage", method = { RequestMethod.POST,RequestMethod.GET}, consumes ="multipart/form-data")
-    public String uploadPicture(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        MultipartHttpServletRequest req = (MultipartHttpServletRequest) request;
-        //对应前端的upload的name参数"file"
-        MultipartFile multipartFile = req.getFile("file");
+    @Autowired
+    HsmyInfoPubMapper hsmyInfoPubMapper;
 
-        //realPath填写电脑文件夹路径
-        String realPath = "D:\\Pictures\\WeChatPic";
-        WechatUtils.SaveWechatImage(multipartFile, realPath,"");
-        return "1";
-    }
+    @Autowired
+    HsmyInfoPub hsmyInfoPub;
 
-    @RequestMapping(value = "/hsmy/infopub/batchUploadImage", method = RequestMethod.POST)
-    public String handleFileUpload(HttpServletRequest request, @RequestBody HsmyInfoPub infoPub) {
-        MultipartHttpServletRequest params=((MultipartHttpServletRequest) request);
-        List<MultipartFile> multipartFiles = ((MultipartHttpServletRequest) request).getFiles("file");
-        String name=params.getParameter("name");
-        System.out.println("name:"+name);
-        String id=params.getParameter("id");
-        System.out.println("id:"+id);
-        MultipartFile multipartFile = null;
-        BufferedOutputStream stream = null;
-        for (int i = 0; i < multipartFiles.size(); ++i) {
-            multipartFile = multipartFiles.get(i);
-            if (!multipartFile.isEmpty()) {
-                try {
-                    //realPath填写电脑文件夹路径
-                    String realPath = "D:\\Pictures\\WeChatPic";
-                    //格式化时间戳
-                    WechatUtils.SaveWechatImage(multipartFile, realPath,"");
-                } catch (Exception e) {
-                    stream = null;
-                    return "You failed to upload " + i + " => "  + e.getMessage();
+    @Value("${wechat.infopub.filepath}")
+    String infopubFilesPath;
+
+    @Value("${wechat.infopub.filesplitchar}")
+    String splitchar;
+
+    @RequestMapping(value = "/hsmy/batchUploadImage", method =  RequestMethod.POST )
+    public Result<HsmyInfoPub>  handleFileUpload(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            MultipartHttpServletRequest mulRequest = (MultipartHttpServletRequest) request;
+            String openid = request.getHeader("openid");
+            List<MultipartFile> multipartFiles = mulRequest.getFiles("infopubfiles");
+            String infoSerno = mulRequest.getParameter("infoSerno");
+            String picsDesc = infopubFilesPath + "\\Default.png";  //加一张默认一张图片
+            if (CommonToolsUtils.isNotNull(multipartFiles) && multipartFiles.size() != 0) {
+                picsDesc = "";
+                MultipartFile multipartFile = null;
+                BufferedOutputStream stream = null;
+                for (int i = 0; i < multipartFiles.size(); ++i) {
+                    multipartFile = multipartFiles.get(i);
+                    if (!multipartFile.isEmpty()) {
+                        try {
+                            //存储图片
+                            picsDesc += WechatUtils.SaveWechatImage(multipartFile, infopubFilesPath + "\\" + openid) +  splitchar;;
+                        } catch (Exception e) {
+                            logger.debug(e);
+                            stream = null;
+                            return DefaultResult.newFailResult( ConstantErrMsg.INFOPUBMSG + ConstantErrMsg.UPDATEFAIL + ConstantErrMsg.TRYCATCHEXCEPTION);
+                        }
+                    }
+                }
+
+                //更新信息
+                hsmyInfoPub.setInfoSerno(infoSerno);
+                hsmyInfoPub.setPicsDesc(picsDesc);
+               // hsmyInfoPub.setLastDate(new Date());
+                int count = hsmyInfoPubMapper.updatePicDescByInfoSerno(infoSerno);
+                if (CommonToolsUtils.isNotNull(count) && count > 0) {
+                    return DefaultResult.newResult(hsmyInfoPub);
+                } else {
+                    return DefaultResult.newFailResult( ConstantErrMsg.INFOPUBMSG + ConstantErrMsg.UPDATEFAIL  );
                 }
             } else {
-                return "You failed to upload " + i + " because the file was empty.";
+                return DefaultResult.newFailResult( ConstantErrMsg.INFOPUBMSG + ConstantErrMsg.UPDATEFAIL  );
             }
+        } catch (Exception e) {
+            return DefaultResult.newFailResult( ConstantErrMsg.INFOPUBMSG + ConstantErrMsg.UPDATEFAIL + ConstantErrMsg.TRYCATCHEXCEPTION);
         }
-        return "upload successful";
     }
-
-
-
-
 }
 
 

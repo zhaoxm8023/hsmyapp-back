@@ -39,4 +39,6 @@ public interface HsmyInfoPubMapper {
     List<LinkedHashMap<String, Object>> selectInfo();
 
     String getAppSequenceNo(Map<String, Object> params);
+
+    int updatePicDescByInfoSerno(String infoSerno);
 }

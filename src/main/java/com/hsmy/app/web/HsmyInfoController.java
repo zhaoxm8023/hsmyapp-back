@@ -1,17 +1,15 @@
 package com.hsmy.app.web;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.hsmy.app.BusinessException;
 import com.hsmy.app.bean.HsmyInfoPub;
+import com.hsmy.app.constant.ConstantErrMsg;
 import com.hsmy.app.enums.SequenceNameEnum;
 import com.hsmy.app.enums.SequenceNumberEnum;
 import com.hsmy.app.mapper.HsmyInfoPubMapper;
 import com.hsmy.app.service.HsmyInfoService;
 import com.hsmy.app.utils.CommonToolsUtils;
 import com.hsmy.app.utils.DateUtils;
-import com.hsmy.app.utils.WechatUtils;
 import com.hsmy.app.web.support.DefaultResult;
 import com.hsmy.app.web.support.Result;
 import io.swagger.annotations.ApiOperation;
@@ -20,13 +18,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
 import java.util.*;
 
 
@@ -77,54 +70,29 @@ public class HsmyInfoController {
 
     //录入信息
     @RequestMapping(path = "/hsmy/infopub", method = RequestMethod.POST)
-    public Result<HsmyInfoPub> insertInfoPub( HttpServletRequest request, HttpServletResponse response) {
+    public Result<HsmyInfoPub> insertInfoPub(@RequestBody HsmyInfoPub hsmyInfoPub) {
         try {
-            MultipartHttpServletRequest mulRequest = (MultipartHttpServletRequest) request;
-            List<MultipartFile> multipartFiles = mulRequest.getFiles("infopubfiles");
-            String infoPubJson =  mulRequest.getParameter("infopub");
-            hsmyInfoPub = (HsmyInfoPub)JSON.parseObject(infoPubJson,HsmyInfoPub.class);
-            Map<String, Object> param = new HashMap<>();
-            param.put("sequencename", SequenceNameEnum.INFOPUBSEQUENCE.value() );
-            param.put("sequenceday","d");
-            param.put("sequencelenth", SequenceNumberEnum.EIGHTSEQUENCE.value());
-            logger.info("xuliehua  success !");
-            hsmyInfoPub.setInfoSerno(hsmyInfoPubMapper.getAppSequenceNo(param)); // 主键sequence
-            hsmyInfoPub.setLastDate(new Date());
             if (hsmyInfoPub.getOpenId() != null && CommonToolsUtils.isNotNull(hsmyInfoPub)) {
-                String picsDesc = infopubFilesPath + "\\Default.png";  //加一张默认一张图片
-                //处理附件程序
-                if(CommonToolsUtils.isNotNull(multipartFiles)){
-                    picsDesc = "";
-                    MultipartFile multipartFile = null;
-                    BufferedOutputStream stream = null;
-                    for (int i = 0; i < multipartFiles.size(); ++i) {
-                        multipartFile = multipartFiles.get(i);
-                        if (!multipartFile.isEmpty()) {
-                            try {
-                                picsDesc +=  WechatUtils.SaveWechatImage(multipartFile, infopubFilesPath  + "\\"+ hsmyInfoPub.getOpenId(),hsmyInfoPub.getInfoSerno()) + splitchar;
-                            } catch (Exception e) {
-                                stream = null;
-                                return DefaultResult.newFailResult(new BusinessException("提交发布图片信息异常！"));
-                            }
-                        }
-                    }
-                }
-
-                //图片关联存储路径及名称记表 跟 infoSerno关联
-                hsmyInfoPub.setPicsDesc(picsDesc);
+                Map<String, Object> param = new HashMap<>();
+                param.put("sequencename", SequenceNameEnum.INFOPUBSEQUENCE.value() );
+                param.put("sequenceday","d");
+                param.put("sequencelenth", SequenceNumberEnum.EIGHTSEQUENCE.value());
+                hsmyInfoPub.setInfoSerno(hsmyInfoPubMapper.getAppSequenceNo(param)); // 主键sequence
+                hsmyInfoPub.setInfoWorkdata(DateUtils.format(new Date(),"yyyy-MM-dd"));
+                hsmyInfoPub.setLastDate(new Date());
                 logger.info(hsmyInfoPub);
                 //存储图片
                 int count = hsmyInfoPubMapper.insertSelective(hsmyInfoPub);
                 if (count >= 0) {
                     return DefaultResult.newResult(hsmyInfoPub);
                 } else {
-                    return DefaultResult.newFailResult(new BusinessException("发布信息异常！"));
+                    return DefaultResult.newFailResult( ConstantErrMsg.INFOPUBMSG + ConstantErrMsg.UPDATEFAIL  );
                 }
             } else {
-                return DefaultResult.newFailResult(new BusinessException("用户发布信息异常！"));
+                return DefaultResult.newFailResult( ConstantErrMsg.INFOPUBMSG + ConstantErrMsg.UPDATEFAIL  );
             }
         }catch (Exception e){
-            return DefaultResult.newFailResult(new BusinessException("提交错误，发布信息异常！"));
+            return DefaultResult.newFailResult( ConstantErrMsg.INFOPUBMSG + ConstantErrMsg.UPDATEFAIL + ConstantErrMsg.TRYCATCHEXCEPTION);
         }
     }
 

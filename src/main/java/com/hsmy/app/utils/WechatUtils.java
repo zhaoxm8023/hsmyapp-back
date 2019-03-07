@@ -14,22 +14,24 @@ import java.util.Date;
 public class WechatUtils {
 
     private static final Log logger = LogFactory.getLog(WechatUtils.class);
-//    public static String[] ignoreUriPatterns;
-//
-//    public static PathMatcher pathMatcher = new AntPathMatcher();
-//
-//
-//    public static boolean isIgnoreUri(String uri) {
-//        if (null == ignoreUriPatterns)
-//            return false;
-//        return Arrays.asList(ignoreUriPatterns).stream().anyMatch(p -> pathMatcher.match(p, uri));
-//    }
-//
-//    @Value("${web.token.ignore.uri.pattern}")
-//    public static  void setIgnoreUripattern(String ignoreUripattern) {
-//        if (!org.springframework.util.StringUtils.isEmpty(ignoreUripattern))
-//            ignoreUriPatterns = StringUtils.tokenizeToStringArray(ignoreUripattern, ",");
-//    }
+
+    public static String SaveWechatImage(MultipartFile multipartFile, String realPath ) {
+        //格式化时间戳
+        String nowTime = DateUtils.format(new Date(),"yyyy-MM-dd-HH-mm-ss");
+
+        //取得图片前缀名称
+        String originalFirstName = multipartFile.getOriginalFilename();
+        String picFirstName = originalFirstName.substring(0, originalFirstName.indexOf("."));
+
+        //取得图片的格式后缀
+        String originalLastName = multipartFile.getOriginalFilename();
+        String picLastName = originalLastName.substring(originalLastName.lastIndexOf("."));
+
+        //拼接：名字+时间戳+后缀  可以自定义
+        String picName = picFirstName + "." + nowTime + picLastName;
+        saveImage(multipartFile, realPath, picName);
+        return picName ;
+    }
 
 
     public static String SaveWechatImage(MultipartFile multipartFile, String realPath, String fileSerno) {
@@ -47,6 +49,11 @@ public class WechatUtils {
 
         //拼接：名字+时间戳+后缀  可以自定义
         String picName = fileSerno + picFirstName + "." + nowTime + picLastName;
+        saveImage(multipartFile, realPath, picName);
+        return picName ;
+    }
+
+    private static void saveImage(MultipartFile multipartFile, String realPath, String picName) {
         try {
             //默认目录 + 微信id作为图片查询目录
             File dir = new File(realPath);
@@ -63,6 +70,5 @@ public class WechatUtils {
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
-        return picName ;
     }
 }
