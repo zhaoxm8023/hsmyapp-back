@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.hsmy.app.BusinessException;
 import com.hsmy.app.common.ResponseCodes;
+import org.apache.tomcat.util.http.fileupload.FileUploadBase;
 
 public class DefaultResult<T> implements Result<T> {
 
@@ -41,7 +42,13 @@ public class DefaultResult<T> implements Result<T> {
     public static <T> Result<T> newFailResult(Throwable ex) {
         DefaultResult<T> result = new DefaultResult<>();
         result.status = Result.STATUS_FAIL;
-        result.responseMessage = ex.getMessage();
+        if(ex.getMessage().indexOf("FileSizeLimitExceededException") >= 0 ){
+            result.responseMessage =  "附件超出上传规定 大小";
+        }else {
+            result.responseMessage = ex.getMessage();
+        }
+
+
         result.responseCode = (ex instanceof BusinessException) ? ((BusinessException) ex).getCode()
                 : ResponseCodes.RESPONSE_CODE_SYSTEM_ERROR;
         return result;
