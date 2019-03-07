@@ -37,4 +37,6 @@ public interface HsmyInfoPubMapper {
     int updateByPrimaryKey(HsmyInfoPub record);
 
     List<LinkedHashMap<String, Object>> selectInfo();
+
+    String getAppSequenceNo(Map<String, Object> params);
 }

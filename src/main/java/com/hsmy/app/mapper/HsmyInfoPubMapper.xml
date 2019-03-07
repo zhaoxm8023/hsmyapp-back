@@ -294,4 +294,15 @@
         select a.*
         from hsmy_infopub a
     </select>
+
+  <select id="getAppSequenceNo" parameterMap="sequencemap" resultType="java.lang.String" statementType="CALLABLE">
+      CALL hsmy_sequence(#{sequencename,mode=IN},#{sequenceday,mode=IN},#{sequencelenth,mode=IN});
+  </select>
+
+  <parameterMap id="sequencemap" type="java.util.Map">
+    <parameter property="sequencename" jdbcType="VARCHAR" mode="IN"></parameter>
+    <parameter property="sequenceday" jdbcType="VARCHAR" mode="IN"></parameter>
+    <parameter property="sequencelenth" jdbcType="VARCHAR" mode="IN"></parameter>
+  </parameterMap>
+
 </mapper>

@@ -5,9 +5,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hsmy.app.BusinessException;
 import com.hsmy.app.bean.HsmyInfoPub;
+import com.hsmy.app.enums.SequenceNameEnum;
+import com.hsmy.app.enums.SequenceNumberEnum;
 import com.hsmy.app.mapper.HsmyInfoPubMapper;
 import com.hsmy.app.service.HsmyInfoService;
 import com.hsmy.app.utils.CommonToolsUtils;
+import com.hsmy.app.utils.DateUtils;
 import com.hsmy.app.utils.WechatUtils;
 import com.hsmy.app.web.support.DefaultResult;
 import com.hsmy.app.web.support.Result;
@@ -24,8 +27,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -81,6 +83,13 @@ public class HsmyInfoController {
             List<MultipartFile> multipartFiles = mulRequest.getFiles("infopubfiles");
             String infoPubJson =  mulRequest.getParameter("infopub");
             hsmyInfoPub = (HsmyInfoPub)JSON.parseObject(infoPubJson,HsmyInfoPub.class);
+            Map<String, Object> param = new HashMap<>();
+            param.put("sequencename", SequenceNameEnum.INFOPUBSEQUENCE.value() );
+            param.put("sequenceday","d");
+            param.put("sequencelenth", SequenceNumberEnum.EIGHTSEQUENCE.value());
+            logger.info("xuliehua  success !");
+            hsmyInfoPub.setInfoSerno(hsmyInfoPubMapper.getAppSequenceNo(param)); // 主键sequence
+            hsmyInfoPub.setLastDate(new Date());
             if (hsmyInfoPub.getOpenId() != null && CommonToolsUtils.isNotNull(hsmyInfoPub)) {
                 String picsDesc = infopubFilesPath + "\\Default.png";  //加一张默认一张图片
                 //处理附件程序
@@ -103,6 +112,7 @@ public class HsmyInfoController {
 
                 //图片关联存储路径及名称记表 跟 infoSerno关联
                 hsmyInfoPub.setPicsDesc(picsDesc);
+                logger.info(hsmyInfoPub);
                 //存储图片
                 int count = hsmyInfoPubMapper.insertSelective(hsmyInfoPub);
                 if (count >= 0) {
@@ -117,6 +127,7 @@ public class HsmyInfoController {
             return DefaultResult.newFailResult(new BusinessException("提交错误，发布信息异常！"));
         }
     }
+
 
 
     //更新信息

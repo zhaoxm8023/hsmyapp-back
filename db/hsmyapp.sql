@@ -507,3 +507,81 @@ INSERT INTO `user` VALUES (2, 'zhaoxm8', '122', 'oMBNH4_mTCiej8hC9vsWF95IM5ro', 
 INSERT INTO `user` VALUES (3, 'xxx', '123446577', 'oMBNH4z6eV6QNqpDpMW5GrY5rJLA', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+-- ----------------------------
+-- sequence proc 
+-- ----------------------------
+DROP TABLE IF EXISTS `idinfo`;
+CREATE TABLE `idinfo`  (
+  `IDName` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `MaxID` int(11) NOT NULL,
+  `IDDate` datetime(0) NULL DEFAULT NULL,
+  `IDType` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `IDLen` int(11) NOT NULL,
+  `IDValue` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`IDName`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+
+drop procedure if exists hsmy_sequence;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `hsmy_sequence`(in id_name_new VARCHAR(50),in id_type_new char(1),in id_len_new int)
+BEGIN
+  DECLARE vRet VARCHAR(16) DEFAULT '';
+  DECLARE max_id_temp int default 1;
+  DECLARE id_type_old char(1) default '';
+  DECLARE id_date_old datetime;
+  DECLARE id_len_old int default 0;
+ 
+	DECLARE year char(4) DEFAULT cast(year(now()) AS CHAR(4)); -- 当前时间年
+	DECLARE month char(2) DEFAULT lpad(cast(month(now()) AS CHAR(2)),2,'0'); -- 当前时间月(不足2位,左边用0补)
+	DECLARE day char(2) DEFAULT lpad(cast(day(now()) AS CHAR(2)),2,'0'); -- 当前时间天(不足2位,左边用0补)
+ 
+	set id_name_new=ucase(id_name_new);
+	set id_type_new=ucase(id_type_new);
+	IF id_len_new<4 or id_len_new>8 then set id_len_new=4; END IF; 
+	IF id_type_new!='Y'or id_type_new!='M'then set id_type_new='D'; END IF; 
+	
+	select MaxID,IDType,IDDate,IDLen into 
+	       max_id_temp,id_type_old,id_date_old,id_len_old from IDInfo where IDName=id_name_new LIMIT 1 for UPDATE;
+	--  select max_id_temp,id_type_old,id_date_old,id_len_old;
+ 
+			IF id_type_old is not null&& id_type_old!='' THEN set id_type_new=id_type_old; END IF ;
+	    IF id_len_old is not null &&id_len_old!=0 THEN set id_len_new=id_len_old; END IF ;
+ 
+ 
+			IF ucase(id_type_new) = 'Y' THEN
+ 
+				 IF YEAR(now())!=YEAR(id_date_old) THEN SET max_id_temp=1;END IF ; 
+	SET vRet=CONCAT(year,lpad(cast(max_id_temp as char(8)),id_len_new,'0'));
+	SET max_id_temp=max_id_temp+1;
+			END IF ;
+ 
+			IF ucase(id_type_new) = 'M' THEN
+ 
+				 IF YEAR(now())!=YEAR(id_date_old) OR MONTH(now())!=MONTH(id_date_old) THEN SET max_id_temp=1;END IF ;
+	SET vRet=CONCAT(year,month,lpad(cast(max_id_temp as char(8)),id_len_new,'0'));
+	SET max_id_temp=max_id_temp+1;
+			END IF ;
+ 
+			IF ucase(id_type_new) = 'D' THEN
+				 if YEAR(now())!=YEAR(id_date_old) OR MONTH(now())!=MONTH(id_date_old) OR DAY(now())!=DAY(id_date_old) THEN SET max_id_temp=1;END IF ;
+ 
+	SET vRet=CONCAT(year,month,day,lpad(cast(max_id_temp as char(8)),id_len_new,'0'));
+	SET max_id_temp=max_id_temp+1;
+			END IF ;
+ 
+ 
+ 
+			START TRANSACTION ;
+			IF id_date_old IS NULL THEN
+ 
+				INSERT INTO IDInfo SELECT id_name_new,max_id_temp,now(),UCASE(id_type_new),id_len_new,vRet;
+	ELSE 
+				UPDATE IDInfo  SET MaxID=max_id_temp,IDDate=now(),IDValue=vRet WHERE IDName=id_name_new;
+			END IF ;
+			COMMIT ;
+			
+	 select vRet;
+END
