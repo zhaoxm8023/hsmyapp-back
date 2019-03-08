@@ -18,7 +18,14 @@ public class HsmyInfoServiceImpl implements HsmyInfoService {
 
 
     @Override
-    public List<LinkedHashMap<String, Object>> selectInfo() {
-        return hsmyInfoPubMapper.selectInfo();
+    public List<LinkedHashMap<String, Object>> selectInfo(Integer type, Integer page, Integer limit) {
+        List<LinkedHashMap<String, Object>> infoMapList = null;
+        if(type == 1){
+            infoMapList = hsmyInfoPubMapper.selectInfo();
+        }
+        else{
+            infoMapList = hsmyInfoPubMapper.selectInfo();
+        }
+        return infoMapList;
     }
 }

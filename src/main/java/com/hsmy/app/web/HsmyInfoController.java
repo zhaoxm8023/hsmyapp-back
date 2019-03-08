@@ -1,13 +1,18 @@
 package com.hsmy.app.web;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.hsmy.app.BusinessException;
 import com.hsmy.app.bean.HsmyInfoPub;
 import com.hsmy.app.enums.SequenceNameEnum;
 import com.hsmy.app.enums.SequenceNumberEnum;
 import com.hsmy.app.mapper.HsmyInfoPubMapper;
 import com.hsmy.app.service.HsmyInfoService;
 import com.hsmy.app.utils.CommonToolsUtils;
+import com.hsmy.app.utils.DateUtils;
 import com.hsmy.app.utils.WechatUtils;
 import com.hsmy.app.web.support.DefaultResult;
 import com.hsmy.app.web.support.Result;
@@ -49,10 +54,17 @@ public class HsmyInfoController {
 
     //查询全部信息 注意翻页查询！
     @ApiOperation(value = "查询发布信息")
-    @RequestMapping(path = "/hsmy/infopub", method = RequestMethod.GET)
-    public JSONArray selectUnfo() {
-        List<LinkedHashMap<String, Object>> infoList = hsmyInfoService.selectInfo();
-        JSONArray jsonArray = JSONArray.parseArray(JSONObject.toJSONString(infoList));  /**list为 List<Map<String, String>>**/
+    @RequestMapping(path = "/hsmy/infopub/list/{type}/{page}/{limit}", method = RequestMethod.GET)
+    public JSONObject selectUnfo(@PathVariable("type") Integer type,@PathVariable("page") Integer page,@PathVariable("limit") Integer limit) {
+        JSONObject map = new JSONObject();//创建JSONmap来存放JSON数据传到前台
+        PageHelper.startPage(page , limit);//设置数据库分页查询的范围
+        List<LinkedHashMap<String, Object>> infoList = hsmyInfoService.selectInfo(type,page,limit);
+        PageInfo<LinkedHashMap<String, Object>> pageInfo = new PageInfo<>(infoList);
+        map.put("count",pageInfo.getTotal());//获取查询总条数
+        map.put("data",infoList);
+
+        JSONObject jsonArray = JSONArray.parseObject(JSONObject.toJSONString(map));
+        logger.info(jsonArray);
         return jsonArray;
     }
 
@@ -104,8 +116,8 @@ public class HsmyInfoController {
                 }
 
                 //图片上传完毕 插入表单信息
-                if (curIndex.equals(maxCount)) {
-                    String infoPubJson = mulRequest.getParameter("data");
+                if (curIndex.equals( maxCount)) {
+                    String infoPubJson = mulRequest.getParameter("dataInfo");
                     hsmyInfoPub = (HsmyInfoPub) JSON.parseObject(infoPubJson, HsmyInfoPub.class);
                     Map<String, Object> param = new HashMap<>();
                     param.put("sequencename", SequenceNameEnum.INFOPUBSEQUENCE.value());
@@ -113,6 +125,7 @@ public class HsmyInfoController {
                     param.put("sequencelenth", SequenceNumberEnum.EIGHTSEQUENCE.value());
                     hsmyInfoPub.setInfoSerno(hsmyInfoPubMapper.getAppSequenceNo(param)); // 主键sequence
                     hsmyInfoPub.setLastDate(new Date());
+                    hsmyInfoPub.setInfoWorkdata(DateUtils.format(new Date(),"yyyy-MM-dd"));
                     //图片关联存储路径及名称记表 跟 infoSerno关联
                     hsmyInfoPub.setPicsDesc(picsSerno);
                     logger.info(hsmyInfoPub);
@@ -133,7 +146,6 @@ public class HsmyInfoController {
             return DefaultResult.newFailResult(new BusinessException("提交错误，发布信息异常！"));
         }
     }
-
 
 
     //更新信息
@@ -159,10 +171,6 @@ public class HsmyInfoController {
             return DefaultResult.newFailResult("暂无查询信息.");
         }
     }
-
-
-
-
 
 
 }

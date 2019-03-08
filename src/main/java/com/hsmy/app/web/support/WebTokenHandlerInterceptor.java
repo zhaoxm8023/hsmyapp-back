@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * 自定义拦截器实现了 WebToken 的校验.
  *
- * @author devzzm
+ * @author
  */
 public class WebTokenHandlerInterceptor implements HandlerInterceptor {
     private static final Log logger = LogFactory.getLog(WebTokenHandlerInterceptor.class);

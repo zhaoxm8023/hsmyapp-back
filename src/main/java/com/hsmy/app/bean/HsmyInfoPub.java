@@ -105,4 +105,5 @@ public class HsmyInfoPub {
     public void setLastDate(Date lastDate) {
         this.lastDate = lastDate;
     }
+
 }

@@ -293,6 +293,7 @@
     <select id="selectInfo" resultType="java.util.LinkedHashMap">
         select a.*
         from hsmy_infopub a
+        order by info_workdata
     </select>
 
   <select id="getAppSequenceNo" parameterMap="sequencemap" resultType="java.lang.String" statementType="CALLABLE">
