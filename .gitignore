@@ -1,6 +1,7 @@
 ##ignore this file##
-/target/ 
- 
+/target/
+.idea/
+
 .classpath
 .project
 .settings      
