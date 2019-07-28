@@ -9,5 +9,5 @@ import java.util.Map;
 
 
 public interface HsmyInfoService {
-    public List<LinkedHashMap<String, Object>> selectInfo(Integer type, Integer page, Integer limit);
+    public List<LinkedHashMap<String, Object>> selectInfo(String openId, Integer page, Integer limit);
 }

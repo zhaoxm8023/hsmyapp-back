@@ -29,6 +29,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.util.*;
 
 
@@ -54,11 +55,11 @@ public class HsmyInfoController {
 
     //查询全部信息 注意翻页查询！
     @ApiOperation(value = "查询发布信息")
-    @RequestMapping(path = "/hsmy/infopub/list/{type}/{page}/{limit}", method = RequestMethod.GET)
-    public JSONObject selectUnfo(@PathVariable("type") Integer type,@PathVariable("page") Integer page,@PathVariable("limit") Integer limit) {
+    @RequestMapping(path = "/hsmy/infopub/list/{openId}/{page}/{limit}", method = RequestMethod.GET)
+    public JSONObject selectUnfo(@PathVariable("openId") String openId,@PathVariable("page") Integer page,@PathVariable("limit") Integer limit) {
         JSONObject map = new JSONObject();//创建JSONmap来存放JSON数据传到前台
         PageHelper.startPage(page , limit);//设置数据库分页查询的范围
-        List<LinkedHashMap<String, Object>> infoList = hsmyInfoService.selectInfo(type,page,limit);
+        List<LinkedHashMap<String, Object>> infoList = hsmyInfoService.selectInfo(openId,page,limit);
         PageInfo<LinkedHashMap<String, Object>> pageInfo = new PageInfo<>(infoList);
         map.put("count",pageInfo.getTotal());//获取查询总条数
         map.put("data",infoList);
@@ -84,7 +85,28 @@ public class HsmyInfoController {
     }
 
 
-    //录入信息
+    //录入单文本信息
+    @RequestMapping(path = "/hsmy/infopub/wordsonly", method = RequestMethod.POST)
+    public Result<HsmyInfoPub> insertInfoPubWordsOnly(@RequestBody HsmyInfoPub hsmyInfoPub){
+        if (hsmyInfoPub.getOpenId() != null && CommonToolsUtils.isNotNull(hsmyInfoPub)){
+            logger.info("Openid:" + hsmyInfoPub.getOpenId());
+            Map<String, Object> param = new HashMap<>();
+            param.put("sequencename", SequenceNameEnum.INFOPUBSEQUENCE.value());
+            param.put("sequenceday", "d");
+            param.put("sequencelenth", SequenceNumberEnum.EIGHTSEQUENCE.value());
+            hsmyInfoPub.setInfoSerno(hsmyInfoPubMapper.getAppSequenceNo(param)); // 主键sequence
+            hsmyInfoPub.setLastDate(new Date());
+            hsmyInfoPub.setInfoWorkdata(DateUtils.format(new Date(),"yyyy-MM-dd"));
+            //图片关联存储路径及名称记表 跟 infoSerno关联 为空代表无图片
+            hsmyInfoPub.setPicsDesc("");
+            logger.info(hsmyInfoPub);
+            //存储图片
+            int count = hsmyInfoPubMapper.insertSelective(hsmyInfoPub);
+        }
+        return DefaultResult.newResult(hsmyInfoPub);
+    }
+
+
     //录入信息
     @RequestMapping(path = "/hsmy/infopub", method = RequestMethod.POST)
     public Result<HsmyInfoPub> insertInfoPub(HttpServletRequest request, HttpServletResponse response) {
@@ -106,7 +128,7 @@ public class HsmyInfoController {
                         multipartFile = multipartFiles.get(i);
                         if (!multipartFile.isEmpty()) {
                             try {
-                                picsDesc += WechatUtils.SaveWechatImage(multipartFile, infopubFilesPath + "\\" + openId, picsSerno) + splitchar;
+                                picsDesc += WechatUtils.SaveWechatImage(multipartFile, infopubFilesPath + File.separator + openId, picsSerno) + splitchar;
                             } catch (Exception e) {
                                 stream = null;
                                 return DefaultResult.newFailResult(new BusinessException("提交发布图片信息异常！"));
@@ -118,6 +140,7 @@ public class HsmyInfoController {
                 //图片上传完毕 插入表单信息
                 if (curIndex.equals( maxCount)) {
                     String infoPubJson = mulRequest.getParameter("dataInfo");
+                    logger.info("infoPubJson" + infoPubJson);
                     hsmyInfoPub = (HsmyInfoPub) JSON.parseObject(infoPubJson, HsmyInfoPub.class);
                     Map<String, Object> param = new HashMap<>();
                     param.put("sequencename", SequenceNameEnum.INFOPUBSEQUENCE.value());

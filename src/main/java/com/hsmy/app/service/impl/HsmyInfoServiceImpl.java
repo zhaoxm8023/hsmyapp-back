@@ -18,13 +18,15 @@ public class HsmyInfoServiceImpl implements HsmyInfoService {
 
 
     @Override
-    public List<LinkedHashMap<String, Object>> selectInfo(Integer type, Integer page, Integer limit) {
+    public List<LinkedHashMap<String, Object>> selectInfo(String openId, Integer page, Integer limit) {
         List<LinkedHashMap<String, Object>> infoMapList = null;
-        if(type == 1){
+        if(openId.equals("all")){
+            //openId为all代表查询所有
             infoMapList = hsmyInfoPubMapper.selectInfo();
         }
-        else{
-            infoMapList = hsmyInfoPubMapper.selectInfo();
+        else {
+            //按openId查询
+            infoMapList = hsmyInfoPubMapper.selectInfoByOpenId(openId);
         }
         return infoMapList;
     }

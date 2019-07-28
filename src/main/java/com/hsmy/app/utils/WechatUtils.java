@@ -36,7 +36,7 @@ public class WechatUtils {
 
     public static String SaveWechatImage(MultipartFile multipartFile, String realPath, String fileSerno) {
         //格式化时间戳
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-S");
         String nowTime = sdf.format(new Date().getTime());
 
         //取得图片前缀名称
@@ -49,6 +49,7 @@ public class WechatUtils {
 
         //拼接：名字+时间戳+后缀  可以自定义
         String picName = fileSerno + picFirstName + "." + nowTime + picLastName;
+        logger.info("图片名称为：" + picName);
         saveImage(multipartFile, realPath, picName);
         return picName ;
     }

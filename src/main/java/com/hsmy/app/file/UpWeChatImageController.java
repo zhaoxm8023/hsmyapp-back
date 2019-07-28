@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class UpWeChatImageController {
                     if (!multipartFile.isEmpty()) {
                         try {
                             //存储图片
-                            picsDesc += WechatUtils.SaveWechatImage(multipartFile, infopubFilesPath + "\\" + openid) +  splitchar;;
+                            picsDesc += WechatUtils.SaveWechatImage(multipartFile, infopubFilesPath + File.separator + openid) +  splitchar;;
                         } catch (Exception e) {
                             logger.debug(e);
                             stream = null;

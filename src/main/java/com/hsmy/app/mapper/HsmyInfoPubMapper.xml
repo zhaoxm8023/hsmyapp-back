@@ -293,7 +293,15 @@
     <select id="selectInfo" resultType="java.util.LinkedHashMap">
         select a.*
         from hsmy_infopub a
-        order by info_workdata
+        order by last_date desc
+    </select>
+
+
+    <select id="selectInfoByOpenId" resultType="java.util.LinkedHashMap">
+        select a.*
+        from hsmy_infopub a
+        where a.open_id = #{openId,jdbcType=VARCHAR}
+        order by last_date desc
     </select>
 
   <select id="getAppSequenceNo" parameterMap="sequencemap" resultType="java.lang.String" statementType="CALLABLE">
