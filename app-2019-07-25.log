@@ -1,0 +1,179 @@
+22:23:03.017 [restartedMain] INFO  com.hsmy.app.HsmyappBackApplication - Starting HsmyappBackApplication on MG-PC with PID 9296 (D:\2019CY\target\classes started by MG in D:\2019CY)
+22:23:03.205 [restartedMain] INFO  com.hsmy.app.HsmyappBackApplication - The following profiles are active: prd
+22:23:03.400 [restartedMain] INFO  o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@9b960d: startup date [Thu Jul 25 22:23:03 CST 2019]; root of context hierarchy
+22:23:03.995 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.3.5.Final
+22:23:08.323 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$67ba5786] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+22:23:10.065 [restartedMain] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8000 (http)
+22:23:10.103 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+22:23:10.104 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.16
+22:23:10.336 [localhost-startStop-1] INFO  o.a.c.c.C.[.[localhost].[/app] - Initializing Spring embedded WebApplicationContext
+22:23:10.337 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 6937 ms
+22:23:11.046 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean - Mapping servlet: 'dispatcherServlet' to [/]
+22:23:11.049 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean - Mapping servlet: 'statViewServlet' to [/druid/*]
+22:23:11.056 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+22:23:11.058 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+22:23:11.058 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+22:23:11.058 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+22:23:11.059 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'webStatFilter' to urls: [/*]
+22:23:12.562 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+22:23:12.605 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+22:23:12.767 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.12.Final}
+22:23:12.770 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+22:23:12.773 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+22:23:12.858 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+22:23:13.082 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@24635595
+22:23:13.083 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration boolean -> org.hibernate.type.BooleanType@24635595
+22:23:13.084 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@24635595
+22:23:13.087 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@1293e46a
+22:23:13.089 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration true_false -> org.hibernate.type.TrueFalseType@7352a3d9
+22:23:13.091 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration yes_no -> org.hibernate.type.YesNoType@2097558
+22:23:13.098 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@4bb09a71
+22:23:13.099 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte -> org.hibernate.type.ByteType@4bb09a71
+22:23:13.099 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@4bb09a71
+22:23:13.103 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration character -> org.hibernate.type.CharacterType@368c05b0
+22:23:13.105 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration char -> org.hibernate.type.CharacterType@368c05b0
+22:23:13.105 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@368c05b0
+22:23:13.108 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@a0857aa
+22:23:13.130 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration short -> org.hibernate.type.ShortType@a0857aa
+22:23:13.131 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Short -> org.hibernate.type.ShortType@a0857aa
+22:23:13.139 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration integer -> org.hibernate.type.IntegerType@68d32251
+22:23:13.140 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration int -> org.hibernate.type.IntegerType@68d32251
+22:23:13.140 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@68d32251
+22:23:13.142 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@71d98e4b
+22:23:13.151 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration long -> org.hibernate.type.LongType@71d98e4b
+22:23:13.151 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Long -> org.hibernate.type.LongType@71d98e4b
+22:23:13.154 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@338d2c4
+22:23:13.154 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration float -> org.hibernate.type.FloatType@338d2c4
+22:23:13.155 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Float -> org.hibernate.type.FloatType@338d2c4
+22:23:13.157 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@464d4ec6
+22:23:13.157 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration double -> org.hibernate.type.DoubleType@464d4ec6
+22:23:13.157 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@464d4ec6
+22:23:13.160 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@34e35a6c
+22:23:13.160 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@34e35a6c
+22:23:13.163 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration big_integer -> org.hibernate.type.BigIntegerType@55fc0f7f
+22:23:13.163 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@55fc0f7f
+22:23:13.165 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration string -> org.hibernate.type.StringType@1cbf5c68
+22:23:13.165 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.String -> org.hibernate.type.StringType@1cbf5c68
+22:23:13.167 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration nstring -> org.hibernate.type.StringNVarcharType@59206c11
+22:23:13.168 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@55789751
+22:23:13.171 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration url -> org.hibernate.type.UrlType@704ef13c
+22:23:13.171 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.net.URL -> org.hibernate.type.UrlType@704ef13c
+22:23:13.177 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration date -> org.hibernate.type.DateType@3a6e1c6c
+22:23:13.178 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Date -> org.hibernate.type.DateType@3a6e1c6c
+22:23:13.181 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration time -> org.hibernate.type.TimeType@1252d8af
+22:23:13.182 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Time -> org.hibernate.type.TimeType@1252d8af
+22:23:13.186 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration timestamp -> org.hibernate.type.TimestampType@e06785d
+22:23:13.186 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@e06785d
+22:23:13.187 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Date -> org.hibernate.type.TimestampType@e06785d
+22:23:13.190 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@24ef0f11
+22:23:13.193 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration calendar -> org.hibernate.type.CalendarType@178f6192
+22:23:13.194 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@178f6192
+22:23:13.195 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@178f6192
+22:23:13.196 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@7baaf071
+22:23:13.198 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration locale -> org.hibernate.type.LocaleType@761deb55
+22:23:13.199 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@761deb55
+22:23:13.201 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration currency -> org.hibernate.type.CurrencyType@76854225
+22:23:13.201 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@76854225
+22:23:13.203 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration timezone -> org.hibernate.type.TimeZoneType@3a2cad86
+22:23:13.203 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@3a2cad86
+22:23:13.205 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration class -> org.hibernate.type.ClassType@4f865120
+22:23:13.205 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Class -> org.hibernate.type.ClassType@4f865120
+22:23:13.208 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@11dd2aae
+22:23:13.208 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@11dd2aae
+22:23:13.209 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@35eb76a0
+22:23:13.211 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration binary -> org.hibernate.type.BinaryType@2b5c78ea
+22:23:13.211 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration byte[] -> org.hibernate.type.BinaryType@2b5c78ea
+22:23:13.212 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [B -> org.hibernate.type.BinaryType@2b5c78ea
+22:23:13.214 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@2e7070db
+22:23:13.214 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@2e7070db
+22:23:13.214 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@2e7070db
+22:23:13.216 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration row_version -> org.hibernate.type.RowVersionType@348782c0
+22:23:13.218 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration image -> org.hibernate.type.ImageType@5d76b1e5
+22:23:13.219 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration characters -> org.hibernate.type.CharArrayType@58307f20
+22:23:13.220 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration char[] -> org.hibernate.type.CharArrayType@58307f20
+22:23:13.220 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [C -> org.hibernate.type.CharArrayType@58307f20
+22:23:13.222 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@1b80d10d
+22:23:13.222 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@1b80d10d
+22:23:13.223 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@1b80d10d
+22:23:13.224 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration text -> org.hibernate.type.TextType@1f0b347b
+22:23:13.226 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration ntext -> org.hibernate.type.NTextType@517b6615
+22:23:13.232 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration blob -> org.hibernate.type.BlobType@6dc15c35
+22:23:13.232 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@6dc15c35
+22:23:13.233 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@6e380fca
+22:23:13.240 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration clob -> org.hibernate.type.ClobType@f2c543b
+22:23:13.240 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@f2c543b
+22:23:13.247 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration nclob -> org.hibernate.type.NClobType@3566dac
+22:23:13.247 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@3566dac
+22:23:13.248 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@54d2dcdf
+22:23:13.249 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@739ba58b
+22:23:13.251 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration serializable -> org.hibernate.type.SerializableType@3fc8f923
+22:23:13.257 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration object -> org.hibernate.type.ObjectType@d886aba
+22:23:13.258 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@d886aba
+22:23:13.259 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@60a62108
+22:23:13.259 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@2e354a1c
+22:23:13.260 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@29126096
+22:23:13.260 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@5fb1dbcf
+22:23:13.260 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@e4e0f50
+22:23:13.260 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@aafd12f
+22:23:13.260 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@3003163c
+22:23:13.261 [restartedMain] DEBUG org.hibernate.type.BasicTypeRegistry - Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@613dcc50
+22:23:13.301 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+22:23:13.917 [restartedMain] TRACE org.hibernate.type.TypeFactory - Scoping types to session factory org.hibernate.internal.SessionFactoryImpl@a03117e
+22:23:14.396 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+22:23:17.247 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/hsmy/batchUploadImage],methods=[POST]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.bean.HsmyInfoPub> com.hsmy.app.file.UpWeChatImageController.handleFileUpload(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+22:23:17.250 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/hsmy/infopub/list/{type}/{page}/{limit}],methods=[GET]}" onto public com.alibaba.fastjson.JSONObject com.hsmy.app.web.HsmyInfoController.selectUnfo(java.lang.Integer,java.lang.Integer,java.lang.Integer)
+22:23:17.253 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/hsmy/infopub],methods=[POST]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.bean.HsmyInfoPub> com.hsmy.app.web.HsmyInfoController.insertInfoPub(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+22:23:17.253 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/hsmy/infopub],methods=[PUT]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.bean.HsmyInfoPub> com.hsmy.app.web.HsmyInfoController.updateInfoPub(com.hsmy.app.bean.HsmyInfoPub)
+22:23:17.254 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/hsmy/infopub/{infoSerno}],methods=[GET]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.bean.HsmyInfoPub> com.hsmy.app.web.HsmyInfoController.selectInfoPubBySerno(java.lang.String)
+22:23:17.255 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/hsmy/infopub],methods=[DELETE]}" onto public com.hsmy.app.web.support.Result<java.lang.Object> com.hsmy.app.web.HsmyInfoController.deleteInfoPubBySerno(java.lang.String)
+22:23:17.257 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/hsmy/user/join],methods=[POST]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.bean.HsmyUser> com.hsmy.app.web.LoginController.join(com.hsmy.app.bean.HsmyUser)
+22:23:17.258 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/qryhsmyuser]}" onto public java.lang.String com.hsmy.app.web.LoginController.selectUsers()
+22:23:17.258 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/hsmy/sms/{phoneno}],methods=[GET]}" onto public com.hsmy.app.web.support.Result<java.lang.String> com.hsmy.app.web.LoginController.sendMsg(java.lang.String) throws com.aliyuncs.exceptions.ClientException
+22:23:17.259 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/hsmy/user/{openId}],methods=[GET]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.bean.HsmyUser> com.hsmy.app.web.LoginController.getUser(java.lang.String)
+22:23:17.260 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/meetingRooms/{id}],methods=[GET]}" onto public com.hsmy.app.web.support.Result<java.util.List<com.hsmy.app.domain.MeetingRoom>> com.hsmy.app.web.MeetingRoomController.list(java.lang.Long)
+22:23:17.261 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/meetingRooms/{id}/schedule],methods=[GET]}" onto public com.hsmy.app.web.support.Result<java.util.List<com.hsmy.app.domain.Schedule>> com.hsmy.app.web.MeetingRoomController.schedules(java.lang.Long,java.util.Date)
+22:23:17.262 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/meetingRooms/schedule/{id}],methods=[DELETE]}" onto public com.hsmy.app.web.support.Result<?> com.hsmy.app.web.MeetingRoomController.cancelSchedule(java.lang.Long)
+22:23:17.262 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/meetingRooms/{id}/schedule],methods=[POST]}" onto public synchronized com.hsmy.app.web.support.Result<com.hsmy.app.domain.Schedule> com.hsmy.app.web.MeetingRoomController.createOrUpdateSchedule(java.lang.Long,java.lang.String,com.hsmy.app.domain.Schedule)
+22:23:17.263 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/participant/{openId}],methods=[GET]}" onto public com.hsmy.app.web.support.Result<java.util.List<com.hsmy.app.vo.ScheduleVO>> com.hsmy.app.web.ParticipantController.participants(java.lang.String,java.util.Date)
+22:23:17.268 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/schedules/{id}],methods=[GET]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.domain.Schedule> com.hsmy.app.web.ScheduleController.get(java.lang.Long)
+22:23:17.269 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/schedules/{id}/join],methods=[POST]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.domain.Schedule> com.hsmy.app.web.ScheduleController.join(java.lang.Long,com.hsmy.app.domain.Participant)
+22:23:17.270 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/team/{id}/join],methods=[POST]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.domain.User> com.hsmy.app.web.TeamController.join(java.lang.Long,com.hsmy.app.domain.User,java.lang.String)
+22:23:17.271 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/teams],methods=[GET]}" onto public com.hsmy.app.web.support.Result<java.util.List<com.hsmy.app.domain.Team>> com.hsmy.app.web.TeamController.findAll()
+22:23:17.272 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/team/{teamId}/user/{openId}],methods=[GET]}" onto public com.hsmy.app.web.support.Result<com.hsmy.app.domain.User> com.hsmy.app.web.TeamController.getUser(java.lang.Long,java.lang.String)
+22:23:17.275 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/wechat/openid/{jsCode}],methods=[GET]}" onto public com.hsmy.app.web.support.Result<java.lang.String> com.hsmy.app.web.WechatController.getOpenId(java.lang.String)
+22:23:17.282 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+22:23:17.284 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+22:23:17.285 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+22:23:17.290 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+22:23:17.291 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+22:23:17.652 [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+22:23:18.317 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@9b960d: startup date [Thu Jul 25 22:23:03 CST 2019]; root of context hierarchy
+22:23:18.458 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+22:23:18.458 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/swagger-ui.html] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+22:23:18.459 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+22:23:18.498 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler]
+22:23:18.595 [restartedMain] INFO  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Detected @ExceptionHandler methods in globalExceptionHandler
+22:23:18.659 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+22:23:19.598 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+22:23:19.683 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+22:23:19.701 [restartedMain] INFO  o.s.c.s.DefaultLifecycleProcessor - Starting beans in phase 2147483647
+22:23:19.702 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+22:23:19.744 [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+22:23:19.929 [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+22:23:20.880 [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: joinUsingPOST_1
+22:23:20.913 [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: getUserUsingGET_1
+22:23:20.927 [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: joinUsingPOST_2
+22:23:20.964 [restartedMain] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+22:23:20.985 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8000"]
+22:23:21.082 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8000"]
+22:23:21.176 [restartedMain] INFO  o.a.tomcat.util.net.NioSelectorPool - Using a shared selector for servlet write/read
+22:23:21.244 [restartedMain] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer - Tomcat started on port(s): 8000 (http)
+22:23:21.257 [restartedMain] INFO  com.hsmy.app.HsmyappBackApplication - Started HsmyappBackApplication in 19.429 seconds (JVM running for 22.024)
+22:25:26.666 [http-nio-8000-exec-2] INFO  o.a.c.c.C.[.[localhost].[/app] - Initializing Spring FrameworkServlet 'dispatcherServlet'
+22:25:26.666 [http-nio-8000-exec-2] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started
+22:25:26.731 [http-nio-8000-exec-2] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 65 ms
+22:25:26.812 [http-nio-8000-exec-2] INFO  c.h.a.w.s.WebTokenHandlerInterceptor - url is  -- : /app/meetingRooms/1
+22:25:26.823 [http-nio-8000-exec-2] INFO  c.h.a.w.s.WebTokenHandlerInterceptor - tokenKey   ------- : null
+22:25:27.013 [http-nio-8000-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: java.lang.IllegalArgumentException: Authorization 不可为空.
