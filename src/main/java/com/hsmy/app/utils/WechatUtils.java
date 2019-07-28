@@ -8,7 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class WechatUtils {
@@ -16,56 +18,59 @@ public class WechatUtils {
     private static final Log logger = LogFactory.getLog(WechatUtils.class);
 
     public static String SaveWechatImage(MultipartFile multipartFile, String realPath ) {
-        //¸ñÊ½»¯Ê±¼ä´Á
+        //ï¿½ï¿½Ê½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½
         String nowTime = DateUtils.format(new Date(),"yyyy-MM-dd-HH-mm-ss");
 
-        //È¡µÃÍ¼Æ¬Ç°×ºÃû³Æ
+        //È¡ï¿½ï¿½Í¼Æ¬Ç°×ºï¿½ï¿½ï¿½ï¿½
         String originalFirstName = multipartFile.getOriginalFilename();
         String picFirstName = originalFirstName.substring(0, originalFirstName.indexOf("."));
 
-        //È¡µÃÍ¼Æ¬µÄ¸ñÊ½ºó×º
+        //È¡ï¿½ï¿½Í¼Æ¬ï¿½Ä¸ï¿½Ê½ï¿½ï¿½×º
         String originalLastName = multipartFile.getOriginalFilename();
         String picLastName = originalLastName.substring(originalLastName.lastIndexOf("."));
 
-        //Æ´½Ó£ºÃû×Ö+Ê±¼ä´Á+ºó×º  ¿ÉÒÔ×Ô¶¨Òå
+        //Æ´ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½+Ê±ï¿½ï¿½ï¿½+ï¿½ï¿½×º  ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½
         String picName = picFirstName + "." + nowTime + picLastName;
         saveImage(multipartFile, realPath, picName);
         return picName ;
     }
 
+    public  static ArrayList<String> getWebchatImage(String fileDesc, String filePath){
+        return  FileUtils.getFileListame(filePath , fileDesc);
+    }
 
     public static String SaveWechatImage(MultipartFile multipartFile, String realPath, String fileSerno) {
-        //¸ñÊ½»¯Ê±¼ä´Á
+        //ï¿½ï¿½Ê½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-S");
         String nowTime = sdf.format(new Date().getTime());
 
-        //È¡µÃÍ¼Æ¬Ç°×ºÃû³Æ
+        //È¡ï¿½ï¿½Í¼Æ¬Ç°×ºï¿½ï¿½ï¿½ï¿½
         String originalFirstName = multipartFile.getOriginalFilename();
         String picFirstName = originalFirstName.substring(0, originalFirstName.indexOf("."));
 
-        //È¡µÃÍ¼Æ¬µÄ¸ñÊ½ºó×º
+        //È¡ï¿½ï¿½Í¼Æ¬ï¿½Ä¸ï¿½Ê½ï¿½ï¿½×º
         String originalLastName = multipartFile.getOriginalFilename();
         String picLastName = originalLastName.substring(originalLastName.lastIndexOf("."));
 
-        //Æ´½Ó£ºÃû×Ö+Ê±¼ä´Á+ºó×º  ¿ÉÒÔ×Ô¶¨Òå
+        //Æ´ï¿½Ó£ï¿½ï¿½ï¿½ï¿½ï¿½+Ê±ï¿½ï¿½ï¿½+ï¿½ï¿½×º  ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½
         String picName = fileSerno + picFirstName + "." + nowTime + picLastName;
-        logger.info("Í¼Æ¬Ãû³ÆÎª£º" + picName);
+        logger.info("Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½" + picName);
         saveImage(multipartFile, realPath, picName);
         return picName ;
     }
 
     private static void saveImage(MultipartFile multipartFile, String realPath, String picName) {
         try {
-            //Ä¬ÈÏÄ¿Â¼ + Î¢ÐÅid×÷ÎªÍ¼Æ¬²éÑ¯Ä¿Â¼
+            //Ä¬ï¿½ï¿½Ä¿Â¼ + Î¢ï¿½ï¿½idï¿½ï¿½ÎªÍ¼Æ¬ï¿½ï¿½Ñ¯Ä¿Â¼
             File dir = new File(realPath);
-            //Èç¹ûÎÄ¼þÄ¿Â¼²»´æÔÚ£¬´´½¨ÎÄ¼þÄ¿Â¼
+            //ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ä¿Â¼
             if (!dir.exists()) {
                 dir.mkdir();
-                logger.info("´´½¨ÎÄ¼þÄ¿Â¼³É¹¦£º" + realPath);
+                logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ä¿Â¼ï¿½É¹ï¿½ï¿½ï¿½" + realPath);
             }
             File file = new File(realPath, picName);
             multipartFile.transferTo(file);
-            logger.info("Ìí¼ÓÍ¼Æ¬³É¹¦£¡");
+            logger.info("ï¿½ï¿½ï¿½Í¼Æ¬ï¿½É¹ï¿½ï¿½ï¿½");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (IllegalStateException e) {

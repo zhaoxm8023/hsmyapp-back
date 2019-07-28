@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -70,19 +71,33 @@ public class HsmyInfoController {
     }
 
     //查询单条信息
-    @RequestMapping(path = "/hsmy/infopub/{infoSerno}", method = RequestMethod.GET)
-    public Result<HsmyInfoPub> selectInfoPubBySerno(@PathVariable  String infoSerno) {
-        hsmyInfoPub = hsmyInfoPubMapper.selectByPrimaryKey(infoSerno);
-        //to do  查找附件的操作
-
-        if (CommonToolsUtils.isNotNull(hsmyInfoPub)) {
-            logger.info(hsmyInfoPub);
-            return DefaultResult.newResult(hsmyInfoPub);
-        } else {
-            logger.info("暂无查询信息");
-            return DefaultResult.newFailResult("暂无查询信息.");
+    @RequestMapping(path = "/hsmy/infopub/{openId}/{infoSerno}", method = RequestMethod.GET)
+    public Result<HsmyInfoPub> selectInfoPubBySerno(@PathVariable("openId") String openId,@PathVariable  String infoSerno) {
+        try{
+            hsmyInfoPub = hsmyInfoPubMapper.selectByPrimaryKey(infoSerno);
+            //查找附件的操作
+            String picDesc = hsmyInfoPub.getPicsDesc();
+            //存在返回图片数据url
+            ArrayList<String> picDatas = WechatUtils.getWebchatImage(picDesc,infopubFilesPath + File.separator + openId);
+            String localUrlDes = "";
+            if(CommonToolsUtils.isNotNull(picDatas) && picDatas.size() > 0 ){
+                for(String  eleFile : picDatas){
+                    localUrlDes += eleFile + splitchar;
+                }
+                hsmyInfoPub.setPicsDesc(localUrlDes);
+            }
+            if (CommonToolsUtils.isNotNull(hsmyInfoPub)) {
+                logger.info(hsmyInfoPub);
+                return DefaultResult.newResult(hsmyInfoPub);
+            } else {
+                logger.info("暂无查询信息");
+                return DefaultResult.newFailResult("暂无查询信息.");
+            }
+        }catch (Exception e){
+            return DefaultResult.newFailResult(new BusinessException("查询信息异常！"));
         }
     }
+
 
 
     //录入单文本信息
