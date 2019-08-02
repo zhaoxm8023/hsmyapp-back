@@ -71,18 +71,24 @@ public class HsmyInfoController {
     }
 
     //查询单条信息
-    @RequestMapping(path = "/hsmy/infopub/{openId}/{infoSerno}", method = RequestMethod.GET)
-    public Result<HsmyInfoPub> selectInfoPubBySerno(@PathVariable("openId") String openId,@PathVariable  String infoSerno) {
+    @RequestMapping(path = "/hsmy/infopub/{infoSerno}", method = RequestMethod.GET)
+    public Result<HsmyInfoPub> selectInfoPubBySerno(@PathVariable  String infoSerno) {
         try{
             hsmyInfoPub = hsmyInfoPubMapper.selectByPrimaryKey(infoSerno);
             //查找附件的操作
             String picDesc = hsmyInfoPub.getPicsDesc();
+            String openId = hsmyInfoPub.getOpenId();
             //存在返回图片数据url
             ArrayList<String> picDatas = WechatUtils.getWebchatImage(picDesc,infopubFilesPath + File.separator + openId);
             String localUrlDes = "";
             if(CommonToolsUtils.isNotNull(picDatas) && picDatas.size() > 0 ){
-                for(String  eleFile : picDatas){
-                    localUrlDes += eleFile + splitchar;
+                for(int i = 0 ; i <picDatas.size();i++){
+                    //String  eleFile : picDatas){
+                    if (i ==  picDatas.size() -1){
+                        localUrlDes += picDatas.get(i);
+                    }else {
+                        localUrlDes += picDatas.get(i) + splitchar;
+                    }
                 }
                 hsmyInfoPub.setPicsDesc(localUrlDes);
             }
