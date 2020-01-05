@@ -1,4 +1,4 @@
-package com.hsmy.app;
+package com.hsmy.app.exception;
 
 public class BusinessException extends RuntimeException {
 

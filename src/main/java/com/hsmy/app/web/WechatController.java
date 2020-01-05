@@ -1,10 +1,8 @@
 package com.hsmy.app.web;
 
-import java.util.Map;
-
+import com.hsmy.app.response.DefaultResult;
+import com.hsmy.app.response.Result;
 import com.hsmy.app.utils.JsonUtils;
-import com.hsmy.app.web.support.DefaultResult;
-import com.hsmy.app.web.support.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 @RestController
 public class WechatController {

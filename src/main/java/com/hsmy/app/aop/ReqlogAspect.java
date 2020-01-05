@@ -11,6 +11,8 @@ import com.hsmy.app.utils.WebUtils;
 import com.hsmy.app.utils.WechatUtils;
 import org.apache.catalina.session.StandardSessionFacade;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -103,6 +105,15 @@ public class ReqlogAspect {
         //保存系统日志
         reqLogService.save(hsmyReqLog);
     }
+
+    @Around("logPointCut()")
+    public Object around(ProceedingJoinPoint pjp) throws Throwable{
+        Object o = pjp.proceed();
+        logger.info("----- do something !");
+        return o ;
+        //return null;
+    }
+
 //
 //    private boolean isIgnoreUri(String uri) {
 //        if (null == ignoreUriPatterns)

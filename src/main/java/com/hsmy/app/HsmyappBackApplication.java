@@ -1,21 +1,20 @@
 package com.hsmy.app;
 
-import com.hsmy.app.web.support.WebTokenHandlerInterceptor;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
 
 @SpringBootApplication
 @EnableScheduling
 //@MapperScan(value = "com.hsmy.app.mapper")
-public class HsmyappBackApplication extends WebMvcConfigurerAdapter {
+public class HsmyappBackApplication extends  SpringBootServletInitializer  {
 
     @Bean
     public DataSource dataSource() {
@@ -23,24 +22,21 @@ public class HsmyappBackApplication extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public PoolProperties poolProperties() {
+    @ConfigurationProperties(prefix = "spring.datasource" )
+    public PoolProperties poolProperties()  {
         return new PoolProperties();
-    }
-
-    @Bean
-    WebTokenHandlerInterceptor webTokenHandlerInterceptor() {
-        return new WebTokenHandlerInterceptor();
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(webTokenHandlerInterceptor()).addPathPatterns("/**");
     }
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(HsmyappBackApplication.class, args);
     }
+
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(HsmyappBackApplication.class);
+    }
+
+
+
 
 }
 

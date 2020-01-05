@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="APP_LOG_PATH" value="/Users/xulinwen/Desktop/hsmyapp-back/logs"/>
+    <property name="APP_LOG_PATH" value="/Users/mw/Documents/2019cy/logs/"/>
     <appender name="ROLLING"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${APP_LOG_PATH}/app.log</file>

@@ -1,18 +1,16 @@
 package com.hsmy.app.file;
 
-import com.hsmy.app.BusinessException;
 import com.hsmy.app.bean.HsmyInfoPub;
-import com.hsmy.app.constant.ConstantErrMsg;
+import com.hsmy.app.common.ConstantErrMsg;
 import com.hsmy.app.mapper.HsmyInfoPubMapper;
+import com.hsmy.app.response.DefaultResult;
+import com.hsmy.app.response.Result;
 import com.hsmy.app.utils.CommonToolsUtils;
 import com.hsmy.app.utils.WechatUtils;
-import com.hsmy.app.web.support.DefaultResult;
-import com.hsmy.app.web.support.Result;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -43,7 +40,7 @@ public class UpWeChatImageController {
     String splitchar;
 
     @RequestMapping(value = "/hsmy/batchUploadImage", method =  RequestMethod.POST )
-    public Result<HsmyInfoPub>  handleFileUpload(HttpServletRequest request, HttpServletResponse response) {
+    public Result<HsmyInfoPub> handleFileUpload(HttpServletRequest request, HttpServletResponse response) {
         try {
             MultipartHttpServletRequest mulRequest = (MultipartHttpServletRequest) request;
             String openid = request.getHeader("openid");

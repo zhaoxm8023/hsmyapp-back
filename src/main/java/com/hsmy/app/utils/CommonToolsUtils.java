@@ -15,9 +15,9 @@ public class CommonToolsUtils {
 
 
     /**
-     * 获得指定数目的UUID
-     * @param number int 需要获得的UUID数量
-     * @return String[] UUID数组
+     * get UUID
+     * @param number int number
+     * @return String[] UUID generate
      */
     public static String[] getUUID(int number){
         if(number < 1){
@@ -31,12 +31,11 @@ public class CommonToolsUtils {
     }
 
     /**
-     * 获得一个UUID
+     * get UUID
      * @return String UUID
      */
     public static String getUUID(){
         String uuid = UUID.randomUUID().toString();
-        //去掉“-”符号
         return uuid.replaceAll("-", "");
     }
 }

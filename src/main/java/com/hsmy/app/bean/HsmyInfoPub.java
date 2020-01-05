@@ -6,6 +6,8 @@ import java.util.Date;
 
 @Component
 public class HsmyInfoPub {
+
+
     private String infoSerno;
 
     private String openId;

@@ -1,17 +1,16 @@
 package com.hsmy.app.web;
 
 
-import com.aliyuncs.exceptions.ClientException;
-import com.hsmy.app.BusinessException;
 import com.hsmy.app.bean.ApiResponse;
 import com.hsmy.app.bean.HsmyUser;
+import com.hsmy.app.exception.BusinessException;
 import com.hsmy.app.mapper.HsmyUserMapper;
+import com.hsmy.app.response.DefaultResult;
+import com.hsmy.app.response.Result;
 import com.hsmy.app.service.WebTokenService;
 import com.hsmy.app.utils.CommonToolsUtils;
 import com.hsmy.app.utils.EbaseYunMessageUtil;
 import com.hsmy.app.utils.StringUtils;
-import com.hsmy.app.web.support.DefaultResult;
-import com.hsmy.app.web.support.Result;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.logging.Log;
@@ -44,7 +43,7 @@ public class LoginController {
 
 
     // 根据团队 id 及 微信 openId 查询绑定的用户
-    @ApiOperation(value="查询用户", notes="根据HsmyUser对象查询用户")
+    @ApiOperation(value = "查询用户", notes = "根据HsmyUser对象查询用户")
     @ApiImplicitParam(name = "openId", value = "用户详细实体HsmyUser", required = true, dataType = "HsmyUser")
     @RequestMapping(path = "/hsmy/user/{openId}", method = RequestMethod.GET)
     public Result<HsmyUser> getUser(@PathVariable(name = "openId") String openId) {
@@ -54,6 +53,7 @@ public class LoginController {
         if (CommonToolsUtils.isNotNull(hsmyUser)) {
             logger.info(hsmyUser);
             String token = webTokenService.generate(hsmyUser.getOpenId());
+            logger.info(token);
             return DefaultResult.newResult(hsmyUser).setHeader("token", token);
         } else {
             logger.info("用户暂未绑定");
@@ -78,7 +78,7 @@ public class LoginController {
                     return DefaultResult.newFailResult(new BusinessException("用户注册异常！"));
                 }
             } catch (Exception e) {
-                logger.info("登录异常",e);
+                logger.info("登录异常", e);
                 return DefaultResult.newFailResult(new BusinessException("不可重复加入小区！"));
             }
         } else {
@@ -88,7 +88,7 @@ public class LoginController {
 
 
     @RequestMapping(path = "/hsmy/sms/{phoneno}", method = RequestMethod.GET)
-    public Result<String> sendMsg(@PathVariable(name = "phoneno") String phoneno) throws ClientException {
+    public Result<String> sendMsg(@PathVariable(name = "phoneno") String phoneno)  {
         //验证码
         String code = "";
         try {

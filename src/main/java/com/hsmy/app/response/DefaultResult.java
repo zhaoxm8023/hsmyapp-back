@@ -1,11 +1,10 @@
-package com.hsmy.app.web.support;
+package com.hsmy.app.response;
+
+import com.hsmy.app.common.ResponseCodes;
+import com.hsmy.app.exception.BusinessException;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.hsmy.app.BusinessException;
-import com.hsmy.app.common.ResponseCodes;
-import org.apache.tomcat.util.http.fileupload.FileUploadBase;
 
 public class DefaultResult<T> implements Result<T> {
 

@@ -10,3 +10,4 @@ public interface BaseEnum <T> {
     public  T value();
     public  String Description();
 }
+

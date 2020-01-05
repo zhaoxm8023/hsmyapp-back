@@ -1,4 +1,4 @@
-package com.hsmy.app;
+package com.hsmy.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

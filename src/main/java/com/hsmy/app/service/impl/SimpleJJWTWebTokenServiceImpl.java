@@ -36,6 +36,7 @@ public class SimpleJJWTWebTokenServiceImpl implements WebTokenService {
     @Override
     public boolean verify(String subject, String token) {
         try {
+            //验证时间和相关信息的解析
             return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject().equals(subject);
         } catch (Exception e) {
             logger.error("Verify fail:", e);

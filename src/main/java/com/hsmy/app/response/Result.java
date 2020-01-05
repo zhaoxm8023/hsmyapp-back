@@ -1,4 +1,4 @@
-package com.hsmy.app.web.support;
+package com.hsmy.app.response;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package com.hsmy.app.constant;
+package com.hsmy.app.common;
 
 /**
  * @Author: zhaoxm

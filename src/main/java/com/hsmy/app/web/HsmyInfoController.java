@@ -5,17 +5,17 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.hsmy.app.BusinessException;
 import com.hsmy.app.bean.HsmyInfoPub;
 import com.hsmy.app.enums.SequenceNameEnum;
 import com.hsmy.app.enums.SequenceNumberEnum;
+import com.hsmy.app.exception.BusinessException;
 import com.hsmy.app.mapper.HsmyInfoPubMapper;
+import com.hsmy.app.response.DefaultResult;
+import com.hsmy.app.response.Result;
 import com.hsmy.app.service.HsmyInfoService;
 import com.hsmy.app.utils.CommonToolsUtils;
 import com.hsmy.app.utils.DateUtils;
 import com.hsmy.app.utils.WechatUtils;
-import com.hsmy.app.web.support.DefaultResult;
-import com.hsmy.app.web.support.Result;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.*;
 
 
