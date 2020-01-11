@@ -15,6 +15,7 @@ import com.hsmy.app.response.Result;
 import com.hsmy.app.service.HsmyInfoService;
 import com.hsmy.app.utils.CommonToolsUtils;
 import com.hsmy.app.utils.DateUtils;
+import com.hsmy.app.utils.SnowFlakeGenerator;
 import com.hsmy.app.utils.WechatUtils;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.logging.Log;
@@ -166,7 +167,8 @@ public class HsmyInfoController {
                     param.put("sequencename", SequenceNameEnum.INFOPUBSEQUENCE.value());
                     param.put("sequenceday", "d");
                     param.put("sequencelenth", SequenceNumberEnum.EIGHTSEQUENCE.value());
-                    hsmyInfoPub.setInfoSerno(hsmyInfoPubMapper.getAppSequenceNo(param)); // 主键sequence
+                    String infoSerno = SnowFlakeGenerator.generateId().toString();
+                    hsmyInfoPub.setInfoSerno(infoSerno); // 主键sequence
                     hsmyInfoPub.setLastDate(new Date());
                     hsmyInfoPub.setInfoWorkdata(DateUtils.format(new Date(),"yyyy-MM-dd"));
                     //图片关联存储路径及名称记表 跟 infoSerno关联
