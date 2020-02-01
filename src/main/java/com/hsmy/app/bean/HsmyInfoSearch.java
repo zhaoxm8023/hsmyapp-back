@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.Date;
 
@@ -18,7 +20,9 @@ public class HsmyInfoSearch {
     @Id
     private String id;
     private String author;
+    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String title;
+    @Field(type = FieldType.Text, analyzer = "ik_smart_word")
     private String content;
     private Date time;
 

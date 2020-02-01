@@ -1,5 +1,6 @@
 package com.hsmy.app;
 
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 @EnableScheduling
+@EnableApolloConfig
 //@MapperScan(value = "com.hsmy.app.mapper")
 public class HsmyappBackApplication extends  SpringBootServletInitializer  {
 

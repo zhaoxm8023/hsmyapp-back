@@ -2,9 +2,8 @@ package com.hsmy.app.web;
 
 
 import com.hsmy.app.utils.RedisUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -25,5 +24,14 @@ public class TestDemoController {
         return redisUtils.set(key,key);
     }
 
+
+    @Value( "${spring.apollo.teststr2}" )
+    String port;
+
+    @GetMapping("hi")
+    @ResponseBody
+    public String hi(String name) {
+        return "hi " + name + " ,i am from port:" + port;
+    }
 
 }
